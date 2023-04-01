@@ -117,12 +117,12 @@ session_start();
 
     <!-- Div Section -> Form Add Game-->
 
-    <div id="ADD_CD" class="section" style="display: none; margin-top: -3em;">
+    <div id="ADD_CD" class="section" style="display: none">
         <div class="add_form">
             <form method="post" action="/PHP/add_cd.php" enctype="multipart/form-data">
                 <div class="form-group">
                     <span class="form-label">System</span>
-                    <select class="form-control" id="system" name="SystemGame">
+                    <select class="form-control" id="system" style="max-width: 49%;" name="SystemGame">
                         <option>PS1</option>
                         <option>PS2</option>
                         <option>PS3</option>
@@ -142,7 +142,7 @@ session_start();
                         <div class="col-md-6">
                             <div class="form-group">
                                 <span class="form-label">Game</span>
-                                <input class="form-control" id="game" name="NameGame" type="text" placeholder="Ex.:Super Mário World">
+                                <input class="form-control"  id="game" name="NameGame" type="text" placeholder="Ex.:Super Mário World">
                             </div>
                         </div>
                         <!--Game Year-->
@@ -161,8 +161,8 @@ session_start();
 
                 <div class="row">
                     <div class="form">
-                        <div class="file btn btn-lg btn-primary">
-                            <label for="Img" class="form-label" style="margin-bottom:-1em">Game Image</label> <br>
+                        <div class="file btn btn-lg btn-primary" style="margin-top:10px">
+                            <label for="Img" class="form-label" >Game Image</label> <br>
                             <div class="file btn btn-lg btn-primary">
                                 <input type="file" name="Img" style="opacity: 1;">
                             </div>
@@ -170,7 +170,7 @@ session_start();
                         </div>
                     </div>
 
-                    <div class="col-md-3" style="margin-left:35%">
+                    <div class="col-md-3" style="margin-left:34%;margin-bottom:1em">
                         <div class="form-btn">
                             <button class="submit-btn">Add Game</button>
                         </div>
