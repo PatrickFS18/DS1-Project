@@ -1,0 +1,233 @@
+<<<<<<< HEAD:gif/Login.html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="LoginBackground.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <audio id="soundclick" src="audio/click.mp3" preload="auto">
+	Your browser does not support the <code>audio</code> element.
+</audio>
+    <div class="alert alert-info" id="alert" role="alert" style="z-index: 10;display: none;margin-bottom: -12px;">
+        <strong> Registered Successfull. Please, login.</strong>
+    </div>
+    <div id="mtnZZZ"></div>
+
+    <div class="background">
+
+        <!--Form Content-->
+
+    </div>
+    <div class="wrapper">
+        <div class="container">
+            <h1 style="font-family:retrofont">Login</h1>
+            <form class="form" action="Login.php" method="post">
+                <input type="text" id='userdata' name="User" placeholder="Username">
+                <input type="password" id='userdata' name="Pwd" placeholder="Password">
+                <input type="submit" value="Let's GO!" id="login-button1" style="background-color:rgba(81, 230, 12, 0.57); font-family: retrofont">
+                <a href="Register.html"><input type="button" value="Create an account" id="login-button2" style="background-color:rgba(204, 184, 4, 0.76); font-family: retrofont; font-size: 16px;"></a>
+
+            </form>
+        </div>
+
+        <ul class="bg-bubbles">
+            <li><img src="gif/mario-gif.gif" alt="mario"> </li>
+            <li><img src="gif/dinossauro.gif" alt=""></li>
+            <li><img src="gif/harry.gif" alt=""></li>
+            <li><img src="gif/spyro.gif" alt=""></li>
+            <li><img src="gif/cuphead-unscreen.gif" alt=""></li>
+            <li><img src="gif/zelda.gif" alt="zelda"></li>
+            <li>Brião, me dá nota pff!</li>
+            <li></li>
+            <li></li>
+            <li><img src="gif/jill.gif" alt=""></li>
+        </ul>
+    </div>
+
+</body>
+<script>
+    const url = window.location.href;
+    if (url.indexOf("msg=Y") > 0) {
+
+        setTimeout(function() {
+            document.getElementById("alert").style.display = "block";
+        }, 1);
+    }
+    if (url.indexOf("msg=Y") > 0) {
+        setTimeout(function() {
+            document.getElementById("alert").style.display = "none";
+        }, 4000);
+    }
+    var playBtn = document.getElementById('userdata'),
+        resetBtn = document.getElementById('login-button1'),
+        middleBtn = document.getElementById('login-button2');
+    soundclick = document.getElementById('soundclick');
+    audios = document.querySelectorAll('audio');
+    console.log(audios);
+
+    playBtn.addEventListener('mouseover', function() {
+        [].forEach.call(audios, function(audio) {
+            // do whatever
+            audio.play();
+        });
+    }, false);
+
+    playBtn.addEventListener('mouseleave', function() {
+        soundclick.pause();
+        soundclick.currentTime = 0;
+    }, false);
+
+    resetBtn.addEventListener('mouseover', function() {
+        soundclick.play();
+    }, false);
+
+    resetBtn.addEventListener('mouseleave', function() {
+        soundclick.pause();
+        soundclick.currentTime = 0;
+    }, false);
+
+    middlebtn.addEventListener('mouseleave', function() {
+        soundclick.pause();
+    }, false);
+
+    middlebtn.addEventListener('mouseleave', function() {
+        soundclick.pause();
+        soundclick.currentTime = 0;
+    }, false);
+</script>
+
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="LoginBackground.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <audio id="soundclick" src="audio/click.mp3" preload="auto">
+	Your browser does not support the <code>audio</code> element.
+</audio>
+    <div class="alert alert-info" id="alert" role="alert" style="z-index: 10;display: none;margin-bottom: -12px;">
+        <strong> Registered Successfull. Please, login.</strong>
+    </div>
+    <div id="mtnZZZ"></div>
+
+    <div class="background">
+
+        <!--Form Content-->
+
+    </div>
+    <div class="wrapper">
+        <div class="container">
+            <h1 style="font-family:retrofont">Login</h1>
+            <form class="form" action="Login.php" method="post">
+                <input type="text" id='userdata1' name="User" placeholder="Username">
+                <input type="password" id='userdata2' name="Pwd" placeholder="Password">
+                <input type="submit" value="Let's GO!" id="login-button1" style="background-color:rgba(81, 230, 12, 0.57); font-family: retrofont">
+                <a href="Register.html"><input type="button" value="Create an account" id="login-button2" style="background-color:rgba(204, 184, 4, 0.76); font-family: retrofont; font-size: 16px;"></a>
+
+            </form>
+        </div>
+
+        <ul class="bg-bubbles">
+            <li><img src="gif/mario-gif.gif" alt="mario"> </li>
+            <li><img src="gif/dinossauro.gif" alt=""></li>
+            <li><img src="gif/harry.gif" alt=""></li>
+            <li><img src="gif/spyro.gif" alt=""></li>
+            <li><img src="gif/cuphead-unscreen.gif" alt=""></li>
+            <li><img src="gif/zelda.gif" alt="zelda"></li>
+            <li>Brião, me dá nota pff!</li>
+            <li></li>
+            <li></li>
+            <li><img src="gif/jill.gif" alt=""></li>
+        </ul>
+    </div>
+
+</body>
+<script>
+    const url = window.location.href;
+    if (url.indexOf("msg=Y") > 0) {
+
+        setTimeout(function() {
+            document.getElementById("alert").style.display = "block";
+        }, 1);
+    }
+    if (url.indexOf("msg=Y") > 0) {
+        setTimeout(function() {
+            document.getElementById("alert").style.display = "none";
+        }, 4000);
+    }
+    var playBtn = document.getElementById('userdata1');
+    secondBtn = document.getElementById('userdata2');
+    buttonBtn1 = document.getElementById('login-button1');
+    buttonBtn2 = document.getElementById('login-button2');
+    soundclick = document.getElementById('soundclick');
+    audios = document.querySelectorAll('audio');
+    console.log(audios);
+
+    playBtn.addEventListener('mouseover', function() {
+        [].forEach.call(audios, function(audio) {
+            // do whatever
+            audio.play();
+        });
+    }, false);
+
+    playBtn.addEventListener('mouseleave', function() {
+        soundclick.pause();
+        soundclick.currentTime = 0;
+    }, false);
+
+    secondBtn.addEventListener('mouseover', function() {
+        soundclick.play();
+    }, false);
+
+    secondBtn.addEventListener('mouseleave', function() {
+        soundclick.pause();
+        soundclick.currentTime = 0;
+    }, false);
+
+    buttonBtn1.addEventListener('mouseover', function() {
+        soundclick.play();
+    }, false);
+
+    buttonBtn1.addEventListener('mouseleave', function() {
+        soundclick.pause();
+        soundclick.currentTime = 0;
+    }, false);
+    buttonBtn2.addEventListener('mouseover', function() {
+        soundclick.play();
+    }, false);
+
+    buttonBtn2.addEventListener('mouseleave', function() {
+        soundclick.pause();
+        soundclick.currentTime = 0;
+    }, false);
+</script>
+
+>>>>>>> 2b8e24861250e6f04c074bf593bef8c9cbf7d2df:Login.html
+</html>

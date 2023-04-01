@@ -1,0 +1,144 @@
+/* Full-width input fields */
+
+@font-face {
+    font-family: "retrofont";
+    src: url(fonts/retrogamefont.TTF);
+}
+
+body {
+    background-color: #4e0281;
+    background: -webkit-linear-gradient(top left, #000000 0%, #140033 100%);
+    background: linear-gradient(to bottom right, #000000 0%, #060036 100%);
+}
+
+h1 {
+    color: Gold;
+    font-family: 'retrofont';
+    margin-left: 5%
+}
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #000000;
+    color: gold;
+    font-style: italic;
+    font-family: 'retrofont';
+    font-size: 20px;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+    background-color: rgb(0, 0, 0);
+    outline: none;
+}
+
+input:hover {
+    background-color: #00cf23;
+}
+
+form {
+    margin-top: 150px;
+    margin-left: 40%;
+    width: 20%;
+    align-items: center;
+    border-top-width: 10px;
+    padding-top: 0%;
+    font-family: 'retrofont';
+    background-color: #000000;
+}
+
+img {
+    width: 20%;
+    margin-left: 35%;
+    margin-top: -8%;
+}
+
+form label {
+    color: gold;
+    font-family: 'retrofont';
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+    font-family: 'retrofont';
+}
+
+
+/* Set a style for all buttons */
+
+button {
+    background-color: #36fa0067;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    font-family: 'retrofont';
+    font-size: 18px;
+    font-family: 'retrofont';
+}
+
+button#register:hover {
+    background: -webkit-linear-gradient(top left, #e00303 0%, #5709cce7 100%);
+    background: linear-gradient(to bottom right, #fafafa 0%, #00cf23 100%);
+}
+
+button#cancel:hover {
+    background: -webkit-linear-gradient(top left, #e00303 0%, #5709cce7 100%);
+    background: linear-gradient(to bottom right, #fafafa 0%, #f50202 100%);
+}
+
+
+/* Extra styles for the cancel button */
+
+.cancelbtn {
+    padding: 14px 20px;
+    background-color: #f44336;
+}
+
+
+/* Float cancel and signup buttons and add an equal width */
+
+.cancelbtn,
+.signupbtn {
+    float: left;
+    width: 50%;
+}
+
+
+/* Add padding to container elements */
+
+.container {
+    padding: 16px;
+}
+
+
+/* Clear floats */
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+a {
+    color: inherit;
+}
+
+
+/* Change styles for cancel button and signup button on extra small screens */
+
+@media screen and (max-width: 300px) {
+    .cancelbtn,
+    .signupbtn {
+        width: 100%;
+    }
+}
