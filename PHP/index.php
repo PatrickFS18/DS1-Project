@@ -96,19 +96,18 @@
                                     </h5>
                                     <!-- Product system-->
                                     <p>
-                                        <span class="console"><i class="fa-brands fa-playstation fa-beat"></i nbsp; nbsp> <?php echo ($Result["Plataforma"]); ?>
-                                            <nbsp; i class="fa-brands fa-playstation fa-beat"></i>
+                                        <span class="console"><i class="fa-brands fa-playstation fa-beat"></i> <?php echo ($Result["Plataforma"]); ?>
+                                            <i class="fa-brands fa-playstation fa-beat"></i>
                                         </span>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                <?php } ?>
-
                 </div>
-                <div style="text-align: center; z-index:10 ;"> <button class="glow-on-hover" id="add-btn" onclick="ShowForm()"><img src="/working-feitos/add.png" style="width: 50px; height: 50px; background-color:black"></button>
-                </div>
+            <?php } ?>
+            <div style="text-align: center; z-index:10 ;"> <button class="glow-on-hover" id="add-btn" onclick="ShowForm()"><img src="/working-feitos/add.png" style="width: 50px; height: 50px; background-color:black"></button>
+            </div>
             </div>
     </section>
 
