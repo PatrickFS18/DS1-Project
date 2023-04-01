@@ -1,4 +1,9 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -6,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    <title>  </title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
@@ -19,7 +24,6 @@
 </head>
 
 <body>
-
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color:rgb(0, 7, 19);">
 
@@ -27,7 +31,7 @@
 
 
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!" style="color:#380081;text-transform:uppercase;font-size:250%">JPW</a>
+            <a class="navbar-brand" href="" style="color:#380081;text-transform:uppercase;font-size:250%">JPW</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -45,13 +49,12 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <button class="btn btn-outline-dark" type="submit">
-                        <i class="bi-cart-fill me-1"></i>
-                        Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                    </button>
-                </form>
+                <button class="btn btn-outline-dark">
+                    <i class="bi-cart-fill me-1"></i>
+                    Cart
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                </button>
+
             </div>
         </div>
     </nav>
@@ -65,17 +68,16 @@
                 <i>
                     <h1 class="has-text-align-center homepagetitle2 has-text-color" style="color:#9800fd;font-size:50px;text-transform:uppercase">GamerX</h1>
                 </i>
-                <p class="lead fw-normal text-white-50 mb-0" style="color:gold">Game Cartridges</p>
+                <p class="lead fw-normal text-white-50 mb-0" style="color:gold"><?php echo 'Hello, '.$_SESSION['User'].'! <br> How was  you day today?';
+; ?></p>
             </div>
         </div>
     </header>
     <!-- Section-->
     <section class="py-5">
-
-        <?php
-        $User = '1';
+<?php
         $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
-        $Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$User' ");
+        $Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$_SESSION[User]' ");
 
 
         while ($Result = $Games->fetch_assoc()) {
@@ -96,7 +98,8 @@
                                     </h5>
                                     <!-- Product system-->
                                     <p>
-                                        <span class="console"><i class="fa-brands fa-playstation fa-beat"></i> <?php echo ($Result["Plataforma"]); ?>
+                                        <span class="console"><i class="fa-brands fa-playstation fa-beat"></i>
+                                            <?php echo ($Result["Plataforma"]); ?>
                                             <i class="fa-brands fa-playstation fa-beat"></i>
                                         </span>
                                     </p>
@@ -106,8 +109,8 @@
                     </div>
                 </div>
             <?php } ?>
-            <div style="text-align: center; z-index:10 ;"> <button class="glow-on-hover" id="add-btn" onclick="ShowForm()"><img src="/working-feitos/add.png" style="width: 50px; height: 50px; background-color:black"></button>
-            </div>
+ <button class="glow-on-hover" id="add-btn" onclick="ShowForm()" style="position: relative;left: 50%;margin: -25px 0 0 -25px;background-color:rgba(0, 7, 19,0.0);text-align: center; z-index:10;border-radius:1em "><img src="/working-feitos/add.png" style="width: 50px; height: 50px;"></button>
+            
             </div>
     </section>
 
@@ -122,10 +125,18 @@
                     <select class="form-control" id="system" name="SystemGame">
                         <option>PS1</option>
                         <option>PS2</option>
+                        <option>PS3</option>
+                        <option>Xbox</option>
+                        <option>Nintendo</option>
+                        <option>MSX</option>
+                        <option>Odyssey</option>
                         <option>MegaDrive</option>
+                        <option>Atari</option>
                     </select>
                     <span class="select-arrow"></span>
                 </div>
+
+                <!--Game Name-->
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
@@ -134,6 +145,8 @@
                                 <input class="form-control" id="game" name="NameGame" type="text" placeholder="Ex.:Super Mário World">
                             </div>
                         </div>
+                        <!--Game Year-->
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <span class="form-label">Year of the Game</span>
@@ -144,6 +157,8 @@
                     <div class="col-md-2">
                     </div>
                 </div>
+                <!--Game Image-->
+
                 <div class="row">
                     <div class="form">
                         <div class="file btn btn-lg btn-primary">
@@ -167,12 +182,10 @@
 
     <!-- Footer-->
 
-    <footer class="py-5 bg-dark">
+    <footer class="py-5 bg-dark" style="display:block">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; JPW 2023</p>
         </div>
-
-
     </footer>
 
     <!-- Bootstrap core JS-->

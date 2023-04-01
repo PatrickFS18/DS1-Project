@@ -1,6 +1,8 @@
 <?php
+session_start();
+
 $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
-$User = 1;
+$User = $_SESSION['User'];
 if (isset($_POST["NameGame"], $_POST["YearGame"], $_POST["SystemGame"], $_FILES["Img"])) {
     $NameGame = $_POST["NameGame"];
     $YearGame = $_POST["YearGame"];
