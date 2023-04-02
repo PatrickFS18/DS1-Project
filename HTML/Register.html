@@ -1,128 +1,115 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Css/register.css">
-    <style>
-        * {
-            box-sizing: border-box
-        }
-    </style>
-    <title>Document</title>
-</head>
-
-<body>
-
-    <!-- Div user exists-->
-
-    <div class="alert alert-danger" id="alert" role="alert" style="z-index: 10;display: none;margin-bottom: -12px;">
-        <strong> User Exists! Please, Login.</strong>
-    </div>
-
-    <audio id="soundclick" src="/audio/click.mp3" preload="auto">
-        Your browser does not support the <code>audio</code> element.
-    </audio>
-
-    <!-- Form Register-->
-
-    <form action="/PHP/Register.php" style="border:1px solid #ccc" method="post">
-        <div class="container">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/Css/register.css">
+      <style>
+         * {
+         box-sizing: border-box
+         }
+      </style>
+      <title>Document</title>
+   </head>
+   <body>
+      <!-- Div user exists-->
+      <div class="alert alert-danger" id="alert" role="alert" style="z-index: 10;display: none;margin-bottom: -12px;">
+         <strong> User Exists! Please, Login.</strong>
+      </div>
+      <audio id="soundclick" src="/audio/click.mp3" preload="auto">
+         Your browser does not support the <code>audio</code> element.
+      </audio>
+      <!-- Form Register-->
+      <form action="/PHP/Register.php" style="border:1px solid #ccc" method="post">
+         <div class="container">
             <h1><i class="fa-solid fa-gamepad fa-beat"></i>&nbsp; Registration &nbsp;<i
-                    class="fa-solid fa-gamepad fa-beat"></i>
+               class="fa-solid fa-gamepad fa-beat"></i>
             </h1>
             <hr>
             <img src="/gif/mario-gif.gif" alt="mario" id='img'>
             <hr>
             <label for="User"><b>User</b></label>
             <input type="text" placeholder="Enter Username" name="User" id='userdata' required>
-
             <label for="Pwd"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="Pwd" id="pwd" onchange="verification()" required>
-
             <label for="psw-repeat"><b>Repeat Password</b></label>
             <input type="password" placeholder="Repeat Password" name="pwd-repeat" onchange="verification()" id="rpwd"
-                required>
-
+               required>
             <div class="clearfix">
-                <a href="/HTML/Login.html"><button type="button" id="cancel" class="cancelbtn"
-                        style='color: black;'>Cancel</button></a>
-                <button type="submit" class="signupbtn" id="register" style='color: black;'>Register</button>
+               <a href="/HTML/Login.html"><button type="button" id="cancel" class="cancelbtn"
+                  style='color: black;'>Cancel</button></a>
+               <button type="submit" class="signupbtn" id="register" style='color: black;'>Register</button>
             </div>
-        </div>
-    </form>
-
-    <script src="https://kit.fontawesome.com/3c9095add8.js" crossorigin="anonymous"></script>
-    <script>
-        var playBtn = document.getElementById('userdata');
-        octoBtn = document.getElementById('pwd');
-        puloBtn = document.getElementById('rpwd');
-        cancelBtn = document.getElementById('cancel');
-        registerBtn = document.getElementById('register');
-        soundclick = document.getElementById('soundclick');
-        audios = document.querySelectorAll('audio');
-        console.log(audios);
-
-        playBtn.addEventListener('mouseover', function () {
-            [].forEach.call(audios, function (audio) {
-                // do whatever
-                audio.play();
-            });
-        }, false);
-
-        playBtn.addEventListener('mouseleave', function () {
-            soundclick.pause();
-            soundclick.currentTime = 0;
-        }, false);
-
-        octoBtn.addEventListener('mouseover', function () {
-            soundclick.play();
-        }, false);
-        octoBtn.addEventListener('mouseleave', function () {
-            soundclick.pause();
-            soundclick.currentTime = 0;
-        }, false);
-        puloBtn.addEventListener('mouseover', function () {
-            soundclick.play();
-        }, false);
-        puloBtn.addEventListener('mouseleave', function () {
-            soundclick.pause();
-            soundclick.currentTime = 0;
-        }, false);
-        cancelBtn.addEventListener('mouseover', function () {
-            soundclick.play();
-        }, false);
-        cancelBtn.addEventListener('mouseleave', function () {
-            soundclick.pause();
-            soundclick.currentTime = 0;
-        }, false);
-        registerBtn.addEventListener('mouseover', function () {
-            soundclick.play();
-        }, false);
-        registerBtn.addEventListener('mouseleave', function () {
-            soundclick.pause();
-            soundclick.currentTime = 0;
-        }, false);
-
-        function verification() {
-            let pwd = document.getElementById("pwd");
-            let rpwd = document.getElementById("rpwd");
-
-            function validatePassword() {
-                if (pwd.value !== rpwd.value) {
-                    rpwd.setCustomValidity("Senhas não conferem!");
-                } else {
-                    rpwd.setCustomValidity('');
-                }
-            }
-
-            pwd.onchange = validatePassword;
-            rpwd.onkeyup = validatePassword;
-        }
-    </script>
-
-</body>
-
+         </div>
+      </form>
+      <script src="https://kit.fontawesome.com/3c9095add8.js" crossorigin="anonymous"></script>
+      <script>
+         var playBtn = document.getElementById('userdata');
+         octoBtn = document.getElementById('pwd');
+         puloBtn = document.getElementById('rpwd');
+         cancelBtn = document.getElementById('cancel');
+         registerBtn = document.getElementById('register');
+         soundclick = document.getElementById('soundclick');
+         audios = document.querySelectorAll('audio');
+         console.log(audios);
+         
+         playBtn.addEventListener('mouseover', function () {
+             [].forEach.call(audios, function (audio) {
+                 // do whatever
+                 audio.play();
+             });
+         }, false);
+         
+         playBtn.addEventListener('mouseleave', function () {
+             soundclick.pause();
+             soundclick.currentTime = 0;
+         }, false);
+         
+         octoBtn.addEventListener('mouseover', function () {
+             soundclick.play();
+         }, false);
+         octoBtn.addEventListener('mouseleave', function () {
+             soundclick.pause();
+             soundclick.currentTime = 0;
+         }, false);
+         puloBtn.addEventListener('mouseover', function () {
+             soundclick.play();
+         }, false);
+         puloBtn.addEventListener('mouseleave', function () {
+             soundclick.pause();
+             soundclick.currentTime = 0;
+         }, false);
+         cancelBtn.addEventListener('mouseover', function () {
+             soundclick.play();
+         }, false);
+         cancelBtn.addEventListener('mouseleave', function () {
+             soundclick.pause();
+             soundclick.currentTime = 0;
+         }, false);
+         registerBtn.addEventListener('mouseover', function () {
+             soundclick.play();
+         }, false);
+         registerBtn.addEventListener('mouseleave', function () {
+             soundclick.pause();
+             soundclick.currentTime = 0;
+         }, false);
+         
+         function verification() {
+             let pwd = document.getElementById("pwd");
+             let rpwd = document.getElementById("rpwd");
+         
+             function validatePassword() {
+                 if (pwd.value !== rpwd.value) {
+                     rpwd.setCustomValidity("Senhas não conferem!");
+                 } else {
+                     rpwd.setCustomValidity('');
+                 }
+             }
+         
+             pwd.onchange = validatePassword;
+             rpwd.onkeyup = validatePassword;
+         }
+      </script>
+   </body>
 </html>
