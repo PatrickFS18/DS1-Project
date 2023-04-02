@@ -1,6 +1,6 @@
 <?php
 //sessao iniciada
-session_destroy();
+
 session_start();
 
 $User = $_POST["User"];

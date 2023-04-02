@@ -50,15 +50,14 @@
                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                   <li class="nav-item"><a class="nav-link active" aria-current="page" href="" style="color:gold">Home</a></li>
                </ul>
-               <button class="btn btn-outline-dark">
+              <!-- <button class="btn btn-outline-dark">
                <i class="fas fa-user-cog"></i>
                ADM 
-               </button>
+               </button>-->
             </div>
          </div>
-         <a href="/PHP/Login.php" class="btn btn-danger btn-lg">
-          <span class="glyphicon glyphicon-log-out"></span> Log out
-        </a>
+         <a href="/HTML/Login.html" class="btn btn-outline-danger">
+          <span class="glyphicon glyphicon-log-out"></span> <i class="fa fa-sign-out" aria-hidden="true" style="margin-right:5px"></i></a>
       </nav>
       <!-- Header-->
       <header class=" py-5" style="background-color:darkgoldenrod">
