@@ -2,7 +2,7 @@
 
    session_start();
    $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
-          
+    $UserID =$_SESSION["ID"];
    ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +67,7 @@
                   <h1 class="has-text-align-center homepagetitle2 has-text-color" style="color:white;font-size:50px;text-transform:uppercase" id="h3">GamerX</h1>
                </i>
                <p class="lead fw-normal text-white-50 mb-0" style="color:gold"><?php echo 'Hello, '.$_SESSION['User'].'! <br> Here you can add games that you want, <br> preferencially games that you played before. <br>It is possible <b> Clicking the <b> Add Button</b>, in the final of this page';
-                  ; ?></p>
+                   ?></p>
             </div>
             
          </div>
@@ -75,18 +75,19 @@
       </header>
       <!-- Count Games-->
       <h3 style="margin-left:45%; color:aquamarine;margin-top:10px;" id="h3">Games: 
-         <?php $Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$_SESSION[User]' ");
+         <?php
+         $Games = $conexao->query("SELECT * FROM `registergame` WHERE `UsuarioID`='$UserID[ID]'");
             $i=0;
             while ($Result = $Games->fetch_assoc()) {
             $i++;
             }
-            echo $i;
+         echo $i;
             ?>
       </h3>
       <!-- Section-->
       <section class="py-5">
          <?php
-            $Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$_SESSION[User]' ");
+            $Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$UserID[ID]' ");
             
             
             while ($Result = $Games->fetch_assoc()) {
@@ -117,7 +118,7 @@
                   </div>
                </div>
             </div>
-            <?php } ?>
+            <?php }  ?>
             <button class="glow-on-hover" id="add-btn" onclick="ShowForm()" style="position: relative;left: 50%;margin: -25px 0 0 -25px;background-color:rgba(0, 7, 19,0.0);text-align: center; z-index:10;border-radius:1em "><img src="/working-feitos/add.png" style="width: 50px; height: 50px;"></button>
          </div>
       </section>

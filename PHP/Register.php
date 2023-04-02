@@ -13,7 +13,7 @@ $Pass = $Hashed_password->fetch_row();
 
 $row = $Query->fetch_row();
 
-if (!password_verify($Pwd, $Pass[0]) && $row[0] < 1) {
+if (!password_verify($Pwd, $Pass[0]) && $User!=='Admin') {
     $Insert = "INSERT INTO `login` (Usuario,Senha) VALUES ('$User','$PwdHashed')";
 
     if (mysqli_query($conexao, $Insert)) {
