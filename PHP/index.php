@@ -1,5 +1,7 @@
 <?php
 session_start();
+$conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
+       
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +23,25 @@ session_start();
     <link rel="stylesheet" href="https://a.pub.network/core/pubfig/cls.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="Css/bootstrap.min.css" />
+<style>
+    #h3{
+  animation: animate 1.5s linear infinite;
+  text-shadow: 0 0 0.2em #B0E0E6;
+ } 
+  
+ @keyframes animate{
+   0%{
+     opacity: 0.7;
+   }
+   50%{
+     opacity: 2;
+   }
+   100%{
+     opacity: 0.8;
+   }
+ }
+
+</style>
 </head>
 
 <body>
@@ -30,53 +51,55 @@ session_start();
 
 
 
-        <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="" style="color:#380081;text-transform:uppercase;font-size:250%">JPW</a>
+        <div class="container px-4 px-lg-5 ">
+            <a class="navbar-brand"  style="color:#380081;text-transform:uppercase;font-size:250%">JPW</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="" style="color:gold">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="">About</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="">All Products</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item" href="">Popular Items</a></li>
-                            <li><a class="dropdown-item" href="">New Arrivals</a></li>
-                        </ul>
-                    </li>
+                
                 </ul>
                 <button class="btn btn-outline-dark">
-                    <i class="bi-cart-fill me-1"></i>
-                    Cart
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    <i class="fas fa-user-cog"></i>
+                    ADM 
                 </button>
 
             </div>
         </div>
     </nav>
     <!-- Header-->
-    <header class="bg-dark py-5">
+    <header class=" py-5" style="background-color:darkgoldenrod">
 
 
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
 
-                <i>
-                    <h1 class="has-text-align-center homepagetitle2 has-text-color" style="color:#9800fd;font-size:50px;text-transform:uppercase">GamerX</h1>
+                <i >
+                    <h1 class="has-text-align-center homepagetitle2 has-text-color" style="color:white;font-size:50px;text-transform:uppercase" id="h3">GamerX</h1>
                 </i>
-                <p class="lead fw-normal text-white-50 mb-0" style="color:gold"><?php echo 'Hello, '.$_SESSION['User'].'! <br> How was  you day today?';
+                <p class="lead fw-normal text-white-50 mb-0" style="color:gold"><?php echo 'Hello, '.$_SESSION['User'].'! <br> Here you can add games that you want, <br> preferencially games that you played before. <br>It is possible <b> Clicking the <b> Add Button</b>, in the final of this page';
 ; ?></p>
             </div>
         </div>
     </header>
+
+    <!-- Count Games-->
+
+    <h3 style="margin-left:45%; color:aquamarine;margin-top:10px;" id="h3">Games: 
+
+<?php $Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$_SESSION[User]' ");
+$i=0;
+while ($Result = $Games->fetch_assoc()) {
+$i++;
+}
+echo $i;
+?></h3>
+
+
     <!-- Section-->
-    <section class="py-5">
+
+<section class="py-5">
 <?php
-        $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
         $Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$_SESSION[User]' ");
 
 
@@ -182,11 +205,15 @@ session_start();
 
     <!-- Footer-->
 
-    <footer class="py-5 bg-dark" style="display:block">
+    <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; JPW 2023</p>
         </div>
+
     </footer>
+
+
+</body>
 
     <!-- Bootstrap core JS-->
 
@@ -209,6 +236,4 @@ session_start();
             }
         }
     </script>
-</body>
-
 </html>
