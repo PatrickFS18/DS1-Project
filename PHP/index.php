@@ -5,7 +5,7 @@ $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_con
 $UserID = $_SESSION["ID"];
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
    <meta charset="utf-8" />
@@ -21,7 +21,7 @@ $UserID = $_SESSION["ID"];
    <link href="/Css/index.css" rel="stylesheet" />
    <link rel="stylesheet" href="https://a.pub.network/core/pubfig/cls.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   <link type="text/css" rel="stylesheet" href="Css/bootstrap.min.css" />
+   <link rel="stylesheet" href="Css/bootstrap.min.css">
 
    <style>
       #h3 {
