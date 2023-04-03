@@ -37,7 +37,6 @@ if (isset($_SESSION["User"])) {
             if ($row[0] > 0) {
                if($row[1]=="Admin"){
                 header("location:/PHP/indexMaster.php");
-            
             }else{
                 header("location:/PHP/index.php");
             }
@@ -59,3 +58,4 @@ if (isset($_SESSION["User"])) {
 
 
 mysqli_close($conexao);
+?>
