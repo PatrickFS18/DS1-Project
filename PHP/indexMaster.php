@@ -9,16 +9,39 @@ $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_con
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <title>Adm</title>
 
    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+   <!-- Core theme CSS (includes Bootstrap)-->
+   <link href="/Css/index.css" rel="stylesheet" />
+   <link rel="stylesheet" href="https://a.pub.network/core/pubfig/cls.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="Css/bootstrap.min.css">
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgb(0, 5, 19);">
+      <div class="container px-4 px-lg-5 ">
+         <a class="navbar-brand" style="color:#380081;text-transform:uppercase;font-size:250%">JPW</a>
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+               <li class="nav-item"><a class="nav-link active" aria-current="page" href="" style="color:gold">Home</a></li>
+            </ul>
+
+         </div>
+      </div>
+      <a href="/HTML/Login.html" class="btn btn-outline-danger">
+         <span class="glyphicon glyphicon-log-out"></span> <i class="fa fa-sign-out" aria-hidden="true" style="margin-right:5px"></i></a>
+   </nav>
+
+   <div style="text-align:left">
    <form method="post" action="indexMaster.php">
       <div style="margin-left:3em;margin-top:3em">
-         <label for="Search">Procurar Usuários por Cartucho:
+         <label for="Search" style='color:white'>Procurar Usuários por Cartucho:<br>
             <input type="text" name="Search">
             <input type="submit">
          </label>
@@ -31,8 +54,8 @@ $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_con
       <thead>
 
          <tr>
-            <th>Cartucho</th>
-            <th>Usuários</th>
+            <th style="color:white">Cartucho</th>
+            <th style="color:white">Usuários</th>
          </tr>
       </thead>
 
@@ -57,8 +80,8 @@ $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_con
             echo ("
          <tbody>
          <tr>
-            <td>" . $Cartucho . "</td>
-            <td>" . implode($Usuario) . "</td>
+            <td style='color:white'>" . $Cartucho . "</td>
+            <td style='color:white'>" . implode($Usuario) . "</td>
          <tr>
 
       </tbody>
@@ -78,6 +101,7 @@ $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_con
       ?>
    </table>
 <!--Qual é o cartucho mais antigo? Quem é o dono?-->
+<div style="margin-left:3em;margin-top:2em">
 <?php
 
 $resultado = mysqli_query($conexao, "SELECT MIN(ano) AS min_ano FROM `registergame`");
@@ -102,14 +126,14 @@ $UserMin.=$Usu;
    $UserMin = array_unique($UserMin);
    $UserMin = implode(',',$UserMin);   
   
-   echo "O menor ano encontrado na tabela é: " . $min_ano . " e o(s) Usuario(s) do Game é/São: " . rtrim($UserMin,',');
+   echo ('<p style="color:white">'."O menor ano encontrado na tabela é: " . $min_ano . " e o(s) Usuario(s) do Game é/São: " . rtrim($UserMin,',').'</p>');
 } else {
    echo "Erro ao consultar o banco de dados";
 }
 ?>
 
 <form action="" method="post">
-   <label for="System">número de games para uma dada plataforma. Escolha uma plataforma: </label>
+   <label for="System" style="color:white">número de games para uma dada plataforma. Escolha uma plataforma: </label> <br>
      <input type="text" placeholder="PS1; Nintendo" name="System">
    <input type="submit">
 
@@ -123,11 +147,13 @@ $UserMin.=$Usu;
     $System =$_POST['System'];
     $CountGames = mysqli_query($conexao, "SELECT count(Titulo) FROM `registergame` WHERE `Plataforma` = '$System'");
     $CountGames = $CountGames -> fetch_column();
-   echo('O número de Cartuchos com o sistema: '.$System.' é: '.$CountGames); 
+   echo('<p style="color:white">'.'O número de Cartuchos com o sistema: '.$System.' é: '.$CountGames).'</p>';
    } 
   
    ?>
+</div>
 
+</div>
 </body>
 
 </html>
