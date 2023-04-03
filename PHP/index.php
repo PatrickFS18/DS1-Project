@@ -54,11 +54,12 @@ $UserID = $_SESSION["ID"];
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                <li class="nav-item"><a class="nav-link active" aria-current="page" href="" style="color:gold">Home</a></li>
+               <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?php if($_SESSION['User']=='Admin'){echo('/PHP/indexMaster.php');}?>" style="color:gold;">Research</a></li>
             </ul>
 
          </div>
       </div>
-      <a href="/HTML/Login.html" class="btn btn-outline-danger">
+      <a href="/PHP/SessionRestart.php" class="btn btn-outline-danger" style="margin-right:1em">
          <span class="glyphicon glyphicon-log-out"></span> <i class="fa fa-sign-out" aria-hidden="true" style="margin-right:5px"></i></a>
    </nav>
    <!-- Header-->
@@ -118,7 +119,7 @@ $UserID = $_SESSION["ID"];
                </div>
             </div>
          <?php }  ?>
-         <button class="glow-on-hover" id="add-btn" onclick="ShowForm()" style="position: relative;left: 50%;margin: -25px 0 0 -25px;background-color:rgba(0, 7, 19,0.0);text-align: center; z-index:10;border-radius:1em "><img src="/working-feitos/add.png" style="width: 50px; height: 50px;"></button>
+         <button class="glow-on-hover" id="add-btn" onclick="ShowForm()" style="position: relative;left: 50%;margin: -25px 0 0 -25px;background-color:rgba(0, 7, 19,0.0);text-align: center; z-index:10;border-radius:1em "><img src="/image/add.png" style="width: 50px; height: 50px;"></button>
          </div>
    </section>
    <!-- Div Section -> Form Add Game-->

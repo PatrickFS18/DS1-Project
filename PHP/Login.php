@@ -52,8 +52,8 @@ if (isset($_SESSION["User"]) && $_SESSION["User"]==trim($User)) {
     } else {
         header("location:/HTML/Login.html");
     }
-}else{
-
+} else {
+    header("location:/HTML/Login.html");
 }
 
 
