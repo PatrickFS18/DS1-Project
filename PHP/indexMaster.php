@@ -151,6 +151,7 @@ $UserMin.=$Usu;
    echo('<p style="color:white">'.'O número de Cartuchos com o sistema: '.$System.' é: '.$CountGames).'</p>';
    } 
   
+mysqli_close($conexao);
    ?>
 </div>
 
