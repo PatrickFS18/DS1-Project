@@ -1,6 +1,7 @@
 <?php
-      $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
-     ?>
+$conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,66 +37,66 @@
       </thead>
 
       <?php
-      
-      // Procurar Usuarios por Cartucho 
 
-      if(isset($_POST['Search']) && trim($_POST['Search'])!==""){
+      // Quem tem o cartucho X?
       $Cartucho = $_POST['Search'];
       $Query = mysqli_query($conexao, "SELECT `UsuarioID` FROM `registergame` WHERE  `Titulo` =trim('$Cartucho')");
       $Row = $Query->fetch_all();
-      
-      $c=0; 
-      foreach($Row as $value){
-       foreach($value as $ID){
-         $UsuariosLogin = $conexao -> query("SELECT `Usuario` FROM `login` WHERE `ID`='$ID'");
-$list[$c]=   $UsuariosLogin = $UsuariosLogin->fetch_row();
-    }
- $c++;
-   }
-   
-      foreach($list as $key => $Usuario){
-         
-         echo ("
+
+      if (isset($_POST['Search']) && trim($_POST['Search']) !== "" && $Row == true) {
+         $c = 0;
+         foreach ($Row as $value) {
+            foreach ($value as $ID) {
+               $UsuariosLogin = $conexao->query("SELECT `Usuario` FROM `login` WHERE `ID`='$ID'");
+               $list[$c] =   $UsuariosLogin = $UsuariosLogin->fetch_row();
+            }
+            $c++;
+         }
+         foreach ($list as $key => $Usuario) {
+            echo ("
          <tbody>
          <tr>
-            <td>".$Cartucho."</td>
-            <td>".implode($Usuario)."</td>
+            <td>" . $Cartucho . "</td>
+            <td>" . implode($Usuario) . "</td>
          <tr>
 
       </tbody>
       ");
-      }
-     /*
-      $i=0;
-      $UsuariosLogin = $conexao -> query("SELECT `Usuario` FROM `login`");
-      
-      $UsuariosLogin = $UsuariosLogin->fetch_assoc();
-      
-      while($UsuariosLogin = $conexao -> query("SELECT `Usuario` FROM `login` WHERE `ID` ='$Row[$i]'")){
-         $Resultado = $UsuariosLogin -> fetch_row();
-         echo ("<tbody>         <tr>         <td>".$Cartucho."</td>            <td>".$Resultado[$i]."</td>         <tr>      </tbody>");
- $i++;
- if($Resultado[$i]==null){
-   die;
- }
-       
-}
-*/
-      
- }
-      
-   
-      ?>
-    <!--  <tbody>
-         <tr>
-            <td>"Mario"</td>
-            <td>User</td>
-         <tr>
+         }
+      } else if (isset($_POST['Search']) && trim($_POST['Search']) !== "") {
+         echo ("
+ <tbody>
+ <tr>
+    <td>" . $Cartucho . "</td>
+    <td>Não encontrado</td>
+ <tr>
 
-      </tbody>
--->
+</tbody>
+");
+      }
+      ?>
    </table>
 
+   <!--Qual é o cartucho mais antigo? Quem é o dono?-->
+   <?php
+
+   $resultado = mysqli_query($conexao, "SELECT MIN(ano) AS min_ano FROM `registergame`");
+
+   if ($resultado) {
+      $linha = mysqli_fetch_assoc($resultado);
+      $min_ano = $linha['min_ano'];
+
+      $UsuID = mysqli_query($conexao, "SELECT `UsuarioID` FROM `registergame` WHERE Ano ='$min_ano'");
+      $UsuID = trim($UsuID->fetch_column());
+      // Usu - > Usuario com Cartucho mais Antigo
+      $Usu = mysqli_query($conexao, "SELECT `Usuario` FROM `login` WHERE ID ='$UsuID'");
+      $Usu = trim($Usu->fetch_column());
+      echo "O menor ano encontrado na tabela é: " . $min_ano . " e o Usuario do Game é: " . $Usu;
+   } else {
+      echo "Erro ao consultar o banco de dados";
+   }
+
+   ?>
 
 </body>
 
