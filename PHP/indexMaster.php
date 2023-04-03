@@ -39,10 +39,11 @@ $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_con
       <?php
 
       // Quem tem o cartucho X?
+      if(isset( $_POST['Search'])){
       $Cartucho = $_POST['Search'];
       $Query = mysqli_query($conexao, "SELECT `UsuarioID` FROM `registergame` WHERE  `Titulo` =trim('$Cartucho')");
       $Row = $Query->fetch_all();
-
+   }
       if (isset($_POST['Search']) && trim($_POST['Search']) !== "" && $Row == true) {
          $c = 0;
          foreach ($Row as $value) {
@@ -76,26 +77,55 @@ $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_con
       }
       ?>
    </table>
+<!--Qual é o cartucho mais antigo? Quem é o dono?-->
+<?php
 
-   <!--Qual é o cartucho mais antigo? Quem é o dono?-->
-   <?php
+$resultado = mysqli_query($conexao, "SELECT MIN(ano) AS min_ano FROM `registergame`");
 
-   $resultado = mysqli_query($conexao, "SELECT MIN(ano) AS min_ano FROM `registergame`");
+if ($resultado) {
+   $linha = mysqli_fetch_assoc($resultado);
+   $min_ano = $linha['min_ano'];
 
-   if ($resultado) {
-      $linha = mysqli_fetch_assoc($resultado);
-      $min_ano = $linha['min_ano'];
-
-      $UsuID = mysqli_query($conexao, "SELECT `UsuarioID` FROM `registergame` WHERE Ano ='$min_ano'");
-      $UsuID = trim($UsuID->fetch_column());
-      // Usu - > Usuario com Cartucho mais Antigo
-      $Usu = mysqli_query($conexao, "SELECT `Usuario` FROM `login` WHERE ID ='$UsuID'");
+   $UsuID = mysqli_query($conexao, "SELECT `UsuarioID` FROM `registergame` WHERE Ano ='$min_ano'");
+   $UserMin='';
+   foreach($UsuID as $key =>$value){
+  foreach ($value as $valu){
+   
+   if ($Usu = mysqli_query($conexao, "SELECT `Usuario` FROM `login` WHERE ID ='$valu'")){
       $Usu = trim($Usu->fetch_column());
-      echo "O menor ano encontrado na tabela é: " . $min_ano . " e o Usuario do Game é: " . $Usu;
-   } else {
-      echo "Erro ao consultar o banco de dados";
+$UserMin.=$Usu;
    }
+  }
+  $UserMin.=' ';
+   }
+   $UserMin= explode(' ',$UserMin);
+   $UserMin = array_unique($UserMin);
+   $UserMin = implode(',',$UserMin);   
+  
+   echo "O menor ano encontrado na tabela é: " . $min_ano . " e o(s) Usuario(s) do Game é/São: " . rtrim($UserMin,',');
+} else {
+   echo "Erro ao consultar o banco de dados";
+}
+?>
 
+<form action="" method="post">
+   <label for="System">número de games para uma dada plataforma. Escolha uma plataforma: </label>
+     <input type="text" placeholder="PS1; Nintendo" name="System">
+   <input type="submit">
+
+</form>
+
+
+   <?php 
+
+    //  número de games para uma dada plataforma/sistema.
+    if(isset($_POST['System'])){
+    $System =$_POST['System'];
+    $CountGames = mysqli_query($conexao, "SELECT count(Titulo) FROM `registergame` WHERE `Plataforma` = '$System'");
+    $CountGames = $CountGames -> fetch_column();
+   echo('O número de Cartuchos com o sistema: '.$System.' é: '.$CountGames); 
+   } 
+  
    ?>
 
 </body>
