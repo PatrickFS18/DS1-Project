@@ -19,12 +19,9 @@ if (isset($_POST["NameGame"], $_POST["YearGame"], $_POST["SystemGame"], $_FILES[
    $Insert = mysqli_prepare($conexao, "INSERT INTO `registergame` (`Titulo`,`Plataforma`,`Ano`,`Image`,`UsuarioID`) VALUES (?, ?, ?, ?, ?)");
     $Insert->bind_param("ssisi", $NameGame, $SystemGame, $YearGame, $nameimageBD, $UserID['ID']);
     $Insert->execute();
-    // Insere os dados no banco de dados
-    //mysqli_query($conexao, $Insert);
        header("location:/PHP/index.php");
 }else{
-    header("location:/PHP/index.php?msg=err");
-    
+    header("location:/PHP/index.php?msg=err");   
 }
 }
 mysqli_close($conexao);

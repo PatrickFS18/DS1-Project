@@ -78,13 +78,9 @@ $UserID = $_SESSION["ID"];
    <!-- Count Games-->
    <h3 style="margin-left:45%;color:aquamarine;margin-top:10px;" id="h3">Games:
       <?php
-      $Games = $conexao->query("SELECT * FROM `registergame` WHERE `UsuarioID`='$UserID[ID]'");
-      $Result = $Games->fetch_assoc();
-      $i = 0;
-      while ($Result) {
-         $i++;
-      }
-      echo ($i);
+      $GamesCount = $conexao->query("SELECT `Titulo` FROM `registergame` WHERE `UsuarioID`='$UserID[ID]'");
+      $ResultCount = $GamesCount->fetch_all();
+      echo(count($ResultCount));
       ?>
    </h3>
    <!-- Section-->
