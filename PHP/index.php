@@ -122,9 +122,13 @@ $UserID = $_SESSION["ID"];
       $Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$UserID[ID]' ");
       while ($Result = $Games->fetch_assoc()) {
       ?>
+
          <div class="container px-4 px-lg-5 mt-5">
+             <form action="remove.php" method="post">
+         <button class="botao" value="<?php echo $Result["ID"]?>" name="Delete" >Delete</button>
+         
          <form id ="buttons" method="post" action="update.php"> 
-               <button class="botao" >Delete</button>
+              
                <input type = "hidden" id="inputHidden" name="UpdateHidden" value="<?php echo $Result["ID"]; ?>"> 
                <button class="botaoUp">Update</button>
         
@@ -157,7 +161,7 @@ $UserID = $_SESSION["ID"];
    </div>
 
 
-           </form>
+           </form></form>
            </div>
    </div>
          <?php }  ?>
