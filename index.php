@@ -1,13 +1,14 @@
 <?php
 
 session_start();
-$conexao = mysqli_connect("localhost", "root", "mysqluser", "gamerx") or print(mysqli_connect_error());
+$conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
 $UserID = $_SESSION["ID"];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
+</script>
    <meta charset="utf-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
    <meta name="description" content="" />
@@ -111,18 +112,38 @@ $UserID = $_SESSION["ID"];
       echo(count($ResultCount));
       ?>
    </h3>
+   <form id ="buttons" method="post"> 
+               <div class="botao" >Delete</div>
+               <div class="botaoUp" onclick="showthis()">Update</div>
+         </form>
+         <div id="UpdateForm" style= "display:none">
+           <form id='update' method="post"  action="update.php" > 
+           <label for="games">Edite o game:</label>
+         <select class="form-control" id="chooseGame" style="max-width: 49%;" name="editGame" required>
+<?php $selectGame = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$UserID[ID]' "); 
+   while ($resultado = $selectGame->fetch_assoc()) {
+?>
+                  <option><?php echo $resultado["Titulo"]?>,<?php echo $resultado["Ano"] ?>  </option>
+   <input value="<?php echo $resultado["Titulo"]?>" name="NameGameUP">
+  <input value="<?php echo $resultado["Ano"]?>" name="YearGameUP">
+  <input value="<?php echo $resultado["Plataforma"]?>" name="SystemGameUP">
+
+               <?php
+   }
+   ?>
+</select>
+  <input type="submit" class="botaoUp" value="Enviar">
+
+         </form>
    <!-- Section-->
    <section class="py-5">
+
       <?php
       $Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$UserID[ID]' ");
-
-
       while ($Result = $Games->fetch_assoc()) {
-
-
       ?>
          <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >
                <div class="col mb-5 border border-warning">
                   <div class="card h-30">
                      <!-- Product image-->
@@ -145,48 +166,7 @@ $UserID = $_SESSION["ID"];
                   </div>
                </div>
                <!--FALTA ESTILIZAR--> 
-               <form id ="buttons" method="post">
-               <?php 
-               $delete = $conexao->query("DELETE from `registergame` WHERE id='$UserID[ID]'");
-               $update = $conexao->query("UPDATE registergame SET `Titulo` = '$Result[Titulo]',`Plataforma` = '$Result[Plataforma]',`Ano` = '$Result[Ano]',`Image` = '$Result[Image]' WHERE ID='$UserID[ID]' ");
-               ?>   
-               <div class="botao" style="">Delete</div>
-               <div class="botaoUp" onclick="showthis()" style="">Update</div>
-
-             
-
-         
-         </form>
-         <div id="UpdateForm" style= "display:none">
-           <form action="" method="post">
-           <label for="games">Edite o game:</label>
-
-  <input value="<?php echo $Result['Titulo']?>" name="NameGameUP">
-  <input value="<?php echo $Result['Ano']?>" name="YearGameUP">
-  <input value="<?php echo $Result['Plataforma']?>" name="SystemGameUP">
-  <input type="submit" class="botaoUp" value="Enviar">
-
-         </form>
-         <?php
-    // Recebe as informações do formulário
-    if (isset($_POST["NameGameUP"],$_POST["YearGameUP"],$_POST["SystemGameUP"]))
-    {
-    $NameGameUP = $_POST["NameGameUP"];
-    $YearGameUP = $_POST["YearGameUP"];
-    $SystemGameUP = $_POST["SystemGameUP"];
-
-    // Obtém o ID do usuário
-    $UserID = $_SESSION['user_id'];
-
-
-    // Se não existir registro com essas informações, faz a atualização
-        $Update= mysqli_query($conexao, "UPDATE `registergame` SET `Titulo` = '$NameGameUP', `Plataforma` = '$SystemGameUP', `Ano` = '$YearGameUP' WHERE `UsuarioID`='$UserID' AND `Titulo`='$Result[Titulo]'");
-        header("location:/PHP/index.php");
-    } else {
-        header("location:/PHP/index.php?msg=err");
-    }
-?>
-
+            
       </div>
    </div>
 
@@ -202,7 +182,7 @@ $UserID = $_SESSION["ID"];
    <!-- Div Section -> Form Add Game-->
    <div id="ADD_CD" class="section" style="display: none">
       <div class="add_form">
-         <form method="post" action="/PHP/add_cd.php" enctype="multipart/form-data">
+         <form method="post" action="add_cd.php" enctype="multipart/form-data">
             <div class="form-group">
                <span class="form-label">System</span>
                <select class="form-control" id="system" style="max-width: 49%;" name="SystemGame" required>
@@ -226,8 +206,7 @@ $UserID = $_SESSION["ID"];
                         <span class="form-label">Game</span>
                         <input class="form-control" id="game" name="NameGame" type="text" placeholder="Ex.:Super Mário World" required>
                      </div>
-                  </div>
-                  <!--Game Year-->
+                  </div>                  <!--Game Year-->
                   <div class="col-md-6">
                      <div class="form-group">
                         <span class="form-label">Year of the Game</span>
@@ -240,6 +219,11 @@ $UserID = $_SESSION["ID"];
             </div>
             <!--Game Image-->
             <div class="row">
+               <div class="form">
+                  <div class="file btn btn-lg btn-primary" style="margin-top:10px">
+                     <label for="Img" class="form-label">Game Image</label> <br>
+                     <div class="file btn btn-lg btn-primary">
+                        <input type="file" name="Img" style="opacity: 1;" required>
                      </div>
                      <span class="select-arrow"></span>
                   </div>
@@ -281,23 +265,53 @@ $UserID = $_SESSION["ID"];
    if (url.indexOf("msg=err") > 0) {
 
       alert("Este jogo já foi adicionado!");
-      window.location.href = "/PHP/index.php";
+      window.location.href = "index.php";
    }
 </script>
-<script>
-function showthis(){
-
+   <script>
+      function showthis(){
       if (document.getElementById("UpdateForm").style.display !== "block") {
          document.getElementById("UpdateForm").style.display = "block";
+         
       } else {
          document.getElementById("UpdateForm").style.display = "none";
       }
    }
-         </script>
+</script>
 </html>
 
 <!--Close conection DB-->
 
 <?php
+
+($conexao = mysqli_connect("localhost", "root", "", "gamerx")) or
+    (print mysqli_connect_error());
+$name = $_POST['NameGame'];
+echo ($name);
+if (isset($_POST['NameGame'], $_POST['NameGameUP'], $_POST['SystemGameUP'], $_POST['YearGameUP'])) {
+   $GameTitulo = $_POST['NameGame'];
+   $Titulo = $_POST['NameGameUP'];
+   $Plataforma = $_POST['SystemGameUP'];
+   $Ano = $_POST['YearGameUP'];
+
+   $query = "SELECT * FROM registergame WHERE Titulo = '$GameTitulo' AND UsuarioID = '$UserID[ID]'";
+   $result = mysqli_query($conexao, $query);
+   $row = mysqli_fetch_assoc($result);
+
+   if ($row) {
+      $query = "UPDATE registergame SET Titulo='$Titulo', Plataforma='$Plataforma', Ano='$Ano' WHERE Titulo='$GameTitulo' AND UsuarioID = '$UserID[ID]'";
+      if (mysqli_query($conexao, $query)) {
+         header("Location:index.php");
+         exit;
+      } else {
+         echo "Erro ao atualizar registro: " . mysqli_error($conexao);
+      }
+   } else {
+      echo "Jogo não encontrado!";
+   }
+} else {
+   echo "Algum dos campos não foi preenchido!";
+}
+
 mysqli_close($conexao);
 ?>
