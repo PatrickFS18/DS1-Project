@@ -3,11 +3,13 @@
 session_start();
 $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
 $UserID = $_SESSION["ID"];
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
+
    <meta charset="utf-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
    <meta name="description" content="" />
@@ -24,6 +26,7 @@ $UserID = $_SESSION["ID"];
    <link rel="stylesheet" href="Css/bootstrap.min.css">
 
    <style>
+
       #h3 {
          animation: animate 1.5s linear infinite;
          text-shadow: 0 0 0.2em #B0E0E6;
@@ -42,7 +45,30 @@ $UserID = $_SESSION["ID"];
             opacity: 0.8;
          }
       }
-   </style>
+      .botao {
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.botaoUp {
+   background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}  </style>
 </head>
 
 <body>
@@ -54,7 +80,7 @@ $UserID = $_SESSION["ID"];
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                <li class="nav-item"><a class="nav-link active" aria-current="page" href="" style="color:gold">Home</a></li>
-               <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?php if($_SESSION['User']=='Admin'){echo('/PHP/indexMaster.php');}?>" style="color:gold;">Research</a></li>
+               <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?php if($_SESSION['User']=='admin'){echo('/PHP/indexMaster.php');}?>" style="color:gold;">Research</a></li>
             </ul>
 
          </div>
@@ -76,6 +102,9 @@ $UserID = $_SESSION["ID"];
          </div>
       </div>
    </header>
+   <div class="alert alert-info" id="alert" role="alert" style="z-index: 10;display: none;margin-bottom: -12px;">
+        <strong> Update Successfull.</strong>
+    </div>
    <!-- Count Games-->
    <h3 style="margin-left:45%;color:aquamarine;margin-top:10px;" id="h3">Games:
       <?php
@@ -84,18 +113,23 @@ $UserID = $_SESSION["ID"];
       echo(count($ResultCount));
       ?>
    </h3>
+   
+   
    <!-- Section-->
    <section class="py-5">
+
       <?php
       $Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$UserID[ID]' ");
-
-
       while ($Result = $Games->fetch_assoc()) {
-
-
       ?>
-         <div class="container px-4 px-lg-5 mt-5 ">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+         <div class="container px-4 px-lg-5 mt-5">
+         <form id ="buttons" method="post" action="update.php"> 
+               <button class="botao" >Delete</button>
+               <input type = "hidden" id="inputHidden" name="UpdateHidden" value="<?php echo $Result["ID"]; ?>"> 
+               <button class="botaoUp">Update</button>
+        
+
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >
                <div class="col mb-5 border border-warning">
                   <div class="card h-30">
                      <!-- Product image-->
@@ -117,15 +151,24 @@ $UserID = $_SESSION["ID"];
                      </div>
                   </div>
                </div>
-            </div>
+               <!--FALTA ESTILIZAR--> 
+            
+      </div>
+   </div>
+
+
+           </form>
+           </div>
+   </div>
          <?php }  ?>
+      
          <button class="glow-on-hover" id="add-btn" onclick="ShowForm()" style="position: relative;left: 50%;margin: -25px 0 0 -25px;background-color:rgba(0, 7, 19,0.0);text-align: center; z-index:10;border-radius:1em "><img src="/image/add.png" style="width: 50px; height: 50px;"></button>
          </div>
    </section>
    <!-- Div Section -> Form Add Game-->
    <div id="ADD_CD" class="section" style="display: none">
       <div class="add_form">
-         <form method="post" action="/PHP/add_cd.php" enctype="multipart/form-data">
+         <form method="post" action="add_cd.php" enctype="multipart/form-data">
             <div class="form-group">
                <span class="form-label">System</span>
                <select class="form-control" id="system" style="max-width: 49%;" name="SystemGame" required>
@@ -149,8 +192,7 @@ $UserID = $_SESSION["ID"];
                         <span class="form-label">Game</span>
                         <input class="form-control" id="game" name="NameGame" type="text" placeholder="Ex.:Super Mário World" required>
                      </div>
-                  </div>
-                  <!--Game Year-->
+                  </div>                  <!--Game Year-->
                   <div class="col-md-6">
                      <div class="form-group">
                         <span class="form-label">Year of the Game</span>
@@ -191,6 +233,21 @@ $UserID = $_SESSION["ID"];
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
+<script> 
+let uRl = window.location.href;
+    if (uRl.indexOf("msg=Y") > 0) {
+
+        setTimeout(function () {
+            document.getElementById("alert").style.display = "block";
+        }, 1);
+    }
+    if (uRl.indexOf("msg=Y") > 0) {
+        setTimeout(function () {
+            document.getElementById("alert").style.display = "none";
+            window.location.href= window.location.href.replace('?msg=Y', '');
+        }, 4000);
+       
+      }</script>
 <!-- Show Form function-->
 <script src="https://kit.fontawesome.com/3c9095add8.js" crossorigin="anonymous"></script>
 <script>
@@ -209,14 +266,10 @@ $UserID = $_SESSION["ID"];
    if (url.indexOf("msg=err") > 0) {
 
       alert("Este jogo já foi adicionado!");
-      window.location.href = "/PHP/index.php";
+      window.location.href = "index.php";
    }
 </script>
-
 </html>
 
 <!--Close conection DB-->
 
-<?php
-mysqli_close($conexao);
-?>
