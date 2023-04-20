@@ -165,7 +165,7 @@ $UserID = $_SESSION["ID"];
            </div>
    </div>
          <?php }  ?>
-      
+         <a href="/pdf.php">baixar pdf teste</a>
          <button class="glow-on-hover" id="add-btn" onclick="ShowForm()" style="position: relative;left: 50%;margin: -25px 0 0 -25px;background-color:rgba(0, 7, 19,0.0);text-align: center; z-index:10;border-radius:1em "><img src="/image/add.png" style="width: 50px; height: 50px;"></button>
          </div>
    </section>
@@ -225,7 +225,9 @@ $UserID = $_SESSION["ID"];
                </div>
          </form>
       </div>
+     
    </div>
+   
    <!-- Footer-->
    <footer class="py-5 bg-dark">
       <div class="container">
