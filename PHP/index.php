@@ -16,11 +16,14 @@
       <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
       <!-- Bootstrap icons-->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  
       <!-- Core theme CSS (includes Bootstrap)-->
       <link href="/Css/index.css" rel="stylesheet" />
       <link rel="stylesheet" href="https://a.pub.network/core/pubfig/cls.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="Css/bootstrap.min.css">
+      
       <style>
          #h3 {
          animation: animate 1.5s linear infinite;
@@ -113,46 +116,84 @@
          </a>
       </h3>
       <!-- Section-->
-      <section class="py-5">
-         <?php
-            $Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$UserID[ID]' ");
-            while ($Result = $Games->fetch_assoc()) {
-            ?>
-         <div class="container px-4 px-lg-5 mt-5">
-            <form action="remove.php" method="post">
+
+         
+<div class="container" style="margin-bottom:10em">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+ <ol class="carousel-indicators" hidden>
+<?php
+$contador = 0;
+while ($contador!==count($ResultCount)){ if($contador==0){?>
+  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+  <?php }else{?> 
+  <li data-target="#myCarousel" data-slide-to="<?php echo $contador ?>"></li>
+  
+<?php }$contador=$contador+1;}?>
+</ol>
+<?php
+$contador = 0;
+$Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$UserID[ID]' ");
+           
+while ($Result = $Games->fetch_assoc()){ if($contador==0){?>
+  <div class="carousel-inner">
+    <div class="item active card-body p-4" style="text-align:center" >
+    <img src="<?php echo $Result["Image"]; ?>" alt="GameImage"  style="width:15em;height:15em">
+    <h3 class="fw-bolder"><?php echo $Result["Titulo"]; ?></h3>
+<span class="console"><i class="fa-brands fa-playstation fa-beat"></i>
+                                 <?php echo ($Result["Plataforma"]); ?>
+                                 <i class="fa-brands fa-playstation fa-beat"></i>
+                                 </span>
+                                 <div  style="">
+<form action="remove.php" method="post">
                <button class="botao" value="<?php echo $Result["ID"]?>" name="Delete" >Delete</button>
             <form id ="buttons" method="post" action="update.php">
                <input type = "hidden" id="inputHidden" name="UpdateHidden" value="<?php echo $Result["ID"]; ?>"> 
                <button class="botaoUp">Update</button>
-               <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >
-                  <div class="col mb-5 border border-warning">
-                     <div class="card h-30">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="<?php echo $Result["Image"]; ?>" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                           <div class="text-center">
-                              <!-- Product name-->
-                              <h5 class="fw-bolder"><?php echo $Result["Titulo"]; ?>
-                              </h5>
-                              <!-- Product system-->
-                              <p>
-                                 <span class="console"><i class="fa-brands fa-playstation fa-beat"></i>
+            </form>
+</form>
+</div>
+                              </div>
+
+<?php $contador=$contador+1;}else{ ?>
+
+   <div class="item" style="text-align:center">
+    
+<img src="<?php echo $Result["Image"]; ?>" alt="GameImage"  style="width:15em;height:15em">
+<h3 class="fw-bolder"><?php echo $Result["Titulo"]; ?></h3>
+<span class="console"><i class="fa-brands fa-playstation fa-beat"></i>
                                  <?php echo ($Result["Plataforma"]); ?>
                                  <i class="fa-brands fa-playstation fa-beat"></i>
                                  </span>
-                              </p>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!--FALTA ESTILIZAR--> 
-               </div>
-         </div>
-         </form></form>
-         </div>
-         </div>
-         <?php }  ?>
+                                 <div style="">
+<form action="remove.php" method="post">
+               <button class="botao" value="<?php echo $Result["ID"]?>" name="Delete" >Delete</button>
+            <form id ="buttons" method="post" action="update.php">
+               <input type = "hidden" id="inputHidden" name="UpdateHidden" value="<?php echo $Result["ID"]; ?>"> 
+               <button class="botaoUp">Update</button>
+            </form>
+</form>
+</div>
+</div>
+
+<?php
+}}?>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div> 
+
+<!--colocar aqui o codigo excluido se nn der certo-->
+
+       
+
+
+
+         
          <button class="glow-on-hover" id="add-btn" onclick="ShowForm()" style="position: relative;left: 50%;margin: -25px 0 0 -25px;background-color:rgba(0, 7, 19,0.0);text-align: center; z-index:10;border-radius:1em "><img src="/image/add.png" style="width: 50px; height: 50px;"></button>
          </div>
       </section>
@@ -220,7 +261,10 @@
             <p class="m-0 text-center text-white">Copyright &copy; JPW 2023</p>
          </div>
       </footer>
+   
+
    </body>
+   
    <!-- Bootstrap core JS-->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
    <!-- Core theme JS-->
@@ -274,4 +318,7 @@
          window.location.href = "index.php";
       }
    </script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </html>
+
