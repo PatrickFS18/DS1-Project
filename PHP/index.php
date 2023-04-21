@@ -118,7 +118,7 @@
       <!-- Section-->
 
          
-<div class="container" style="margin-bottom:10em">
+<div class="container" style="margin-bottom:4em">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
  <ol class="carousel-indicators" hidden>
 <?php
@@ -135,15 +135,15 @@ $contador = 0;
 $Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$UserID[ID]' ");
            
 while ($Result = $Games->fetch_assoc()){ if($contador==0){?>
-  <div class="carousel-inner">
+  <div class="carousel-inner" style="margin-bottom: 2em;">
     <div class="item active card-body p-4" style="text-align:center" >
-    <img src="<?php echo $Result["Image"]; ?>" alt="GameImage"  style="width:15em;height:15em">
+    <img src="<?php echo $Result["Image"]; ?>" alt="GameImage"  style="width:18em;height:15em;margin-left:18.6em">
     <h3 class="fw-bolder"><?php echo $Result["Titulo"]; ?></h3>
 <span class="console"><i class="fa-brands fa-playstation fa-beat"></i>
                                  <?php echo ($Result["Plataforma"]); ?>
                                  <i class="fa-brands fa-playstation fa-beat"></i>
                                  </span>
-                                 <div  style="">
+                                 <div >
 <form action="remove.php" method="post">
                <button class="botao" value="<?php echo $Result["ID"]?>" name="Delete" >Delete</button>
             <form id ="buttons" method="post" action="update.php">
@@ -157,14 +157,13 @@ while ($Result = $Games->fetch_assoc()){ if($contador==0){?>
 <?php $contador=$contador+1;}else{ ?>
 
    <div class="item" style="text-align:center">
-    
-<img src="<?php echo $Result["Image"]; ?>" alt="GameImage"  style="width:15em;height:15em">
+<img src="<?php echo $Result["Image"]; ?>" alt="GameImage"   style="width:18em;height:15em;margin-left:18.6em">
 <h3 class="fw-bolder"><?php echo $Result["Titulo"]; ?></h3>
 <span class="console"><i class="fa-brands fa-playstation fa-beat"></i>
                                  <?php echo ($Result["Plataforma"]); ?>
                                  <i class="fa-brands fa-playstation fa-beat"></i>
                                  </span>
-                                 <div style="">
+                                 <div>
 <form action="remove.php" method="post">
                <button class="botao" value="<?php echo $Result["ID"]?>" name="Delete" >Delete</button>
             <form id ="buttons" method="post" action="update.php">
