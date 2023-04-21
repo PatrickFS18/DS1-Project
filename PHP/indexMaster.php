@@ -177,7 +177,11 @@
             <a class="nav-link active" aria-current="page" href="" style="color:gold;">
                <form action="/pdf.php" method="post">
                   <input type="hidden" name="IDUSER" value="admin"  >
-                  <input type="submit" value="Seus Jogos (PDF)"  style="color:gold; background:none">
+                  <input type="submit" value="Gerar Relatório -> Todos Jogos (PDF)"  style="color:gold; background:none">
+               </form>
+               <form action="/pdfEx.php" method="post" style="margin-top:10px">
+                  <input type="hidden" name="Admin" value="admin"  >
+                  <input type="submit" value="Gerar Relatório -> Jogos Excluídos (PDF)"  style="color:gold; background:none">
                </form>
             </a>
          </div>
