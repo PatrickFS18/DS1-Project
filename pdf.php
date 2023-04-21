@@ -72,7 +72,18 @@ while ($Result = $Games->fetch_assoc()) {
         $conteudo_pdf = '';
         $jogos_count = 0;
     }
-    
+    $id = $conexao->query("SELECT `UsuarioID` FROM `registergame` WHERE `Plataforma`='$Result[Plataforma]' AND `Titulo`= '$Result[Titulo]' ");
+    $id = $id->fetch_row();
+    $id = implode($id);
+    if ($id) {
+      $Dono = $conexao->query("SELECT `Usuario` FROM `login` WHERE `ID` = '$id' ");
+      $Dono = $Dono->fetch_row();
+      $Dono = isset($Dono[0]) ? $Dono[0] : 'Não encontrado';
+    }
+    else {
+      $Dono = 'Não encontrado';
+    }
+    $conteudo_pdf .= '<h1>Dono: '.$Dono.'</h1>';
     $conteudo_pdf.='<div class="container px-4 px-lg-5 mt-5">';
     $conteudo_pdf.=' <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >';
     $conteudo_pdf.='     <div class="col mb-5 border border-warning">';
@@ -111,3 +122,4 @@ foreach($conteudo_pdf_array as $conteudo) {
     $dompdf->render();
     $dompdf->stream();
 }
+mysqli_close($conexao);
