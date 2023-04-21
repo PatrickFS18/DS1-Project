@@ -81,6 +81,8 @@ $UserID = $_SESSION["ID"];
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                <li class="nav-item"><a class="nav-link active" aria-current="page" href="" style="color:gold">Home</a></li>
                <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?php if($_SESSION['User']=='admin'){echo('/PHP/indexMaster.php');}?>" style="color:gold;">Research</a></li>
+              
+                       
             </ul>
 
          </div>
@@ -112,8 +114,13 @@ $UserID = $_SESSION["ID"];
       $ResultCount = $GamesCount->fetch_all();
       echo(count($ResultCount));
       ?>
-   </h3>
+    <a class="nav-link active" aria-current="page" href="" style="color:gold; margin-left:-2em"><form action="/pdf.php" method="post">
+         <input type="hidden" name="IDUSER" value="<?php echo (implode($_SESSION["ID"])) ?>"  >
+         <input type="hidden" name="ngames" value ="<?php  echo(count($ResultCount)); ?>">
+         <input type="submit" value="Seus Jogos (PDF)"  style="color:gold; background:none">
+         </form></a>
    
+   </h3> 
    
    <!-- Section-->
    <section class="py-5">
@@ -165,7 +172,7 @@ $UserID = $_SESSION["ID"];
            </div>
    </div>
          <?php }  ?>
-         <a href="/pdf.php">baixar pdf teste</a>
+         
          <button class="glow-on-hover" id="add-btn" onclick="ShowForm()" style="position: relative;left: 50%;margin: -25px 0 0 -25px;background-color:rgba(0, 7, 19,0.0);text-align: center; z-index:10;border-radius:1em "><img src="/image/add.png" style="width: 50px; height: 50px;"></button>
          </div>
    </section>
@@ -253,7 +260,19 @@ let uRl = window.location.href;
             window.location.href= window.location.href.replace('?msg=Y', '');
         }, 4000);
        
-      }</script>
+      }
+      </script>
+<script>
+let urla =  window.location.href;
+    if (urla.indexOf("msg=nogm") > 0) {
+      alert("Você não possui jogos adicionados para gerar relatório!");
+      setTimeout(function () {
+            window.location.href= window.location.href.replace('?msg=nogm', '');
+            
+        }, 1);
+    }
+
+</script>
 <!-- Show Form function-->
 <script src="https://kit.fontawesome.com/3c9095add8.js" crossorigin="anonymous"></script>
 <script>

@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if (isset($_SESSION["User"]) && $_SESSION["User"]==trim($User)) {
     $UID = $conexao -> query("SELECT `ID` FROM `login`WHERE `Usuario` ='$_SESSION[User]'");       
     $UserID = $UID ->fetch_assoc();
-    $_SESSION["ID"] = $UserID;
+    $_SESSION["ID"] = ($UserID);
     $Query = $conexao->query("SELECT * FROM `login` WHERE Usuario='$User'");
 
     $row = $Query->fetch_row();

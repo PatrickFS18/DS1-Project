@@ -1,8 +1,10 @@
 <?php 
 require './vendor/autoload.php';
-
+$ID= $_POST["IDUSER"];
+$ngames= $_POST["ngames"];
+ if($ngames>0){
 $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
-$Games = $conexao->query("SELECT * FROM `registergame`");
+$Games = $conexao->query("SELECT * FROM `registergame` WHERE `UsuarioID`='$ID'");
 
 $max_jogos_por_pagina = 10;
 
@@ -11,7 +13,7 @@ $conteudo_pdf_array = array();
 $jogos_count = 0;
 
 $conteudo_pdf = '';
-
+if($Games){
 while ($Result = $Games->fetch_assoc()) {
     if ($jogos_count == $max_jogos_por_pagina) {
         $conteudo_pdf_array[] = $conteudo_pdf;
@@ -45,6 +47,10 @@ while ($Result = $Games->fetch_assoc()) {
 }
 
 $conteudo_pdf_array[] = $conteudo_pdf;
+}
+}else{
+    header("Location:/PHP/index.php?msg=nogm");
+}
 
 use Dompdf\Dompdf;
 
