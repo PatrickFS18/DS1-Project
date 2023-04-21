@@ -1,7 +1,6 @@
 <?php
-$conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
-
-?>
+($conexao = mysqli_connect("localhost", "root", "", "gamerx")) or
+    (print mysqli_connect_error()); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,75 +60,103 @@ $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_con
       </thead>
 
       <?php
-
       // Quem tem o cartucho X?
-      if(isset( $_POST['Search'])){
-      $Cartucho = $_POST['Search'];
-      $Query = mysqli_query($conexao, "SELECT `UsuarioID` FROM `registergame` WHERE  `Titulo` =trim('$Cartucho')");
-      $Row = $Query->fetch_all();
-   }
-      if (isset($_POST['Search']) && trim($_POST['Search']) !== "" && $Row == true) {
+      if (isset($_POST["Search"])) {
+         $Cartucho = $_POST["Search"];
+         $Query = mysqli_query(
+             $conexao,
+             "SELECT `UsuarioID` FROM `registergame` WHERE  `Titulo` =trim('$Cartucho')"
+         );
+         $Row = $Query->fetch_all();
+     }
+     
+     if (
+         isset($_POST["Search"]) &&
+         trim($_POST["Search"]) !== "" &&
+         $Row == true
+     ) {
          $c = 0;
          foreach ($Row as $value) {
-            foreach ($value as $ID) {
-               $UsuariosLogin = $conexao->query("SELECT `Usuario` FROM `login` WHERE `ID`='$ID'");
-               $list[$c] =   $UsuariosLogin = $UsuariosLogin->fetch_row();
-            }
-            $c++;
+             foreach ($value as $ID) {
+                 $UsuariosLogin = $conexao->query(
+                     "SELECT `Usuario` FROM `login` WHERE `ID`='$ID'"
+                 );
+                 $list[$c] = $UsuariosLogin = $UsuariosLogin->fetch_row();
+             }
+             $c++;
          }
          foreach ($list as $key => $Usuario) {
-            echo ("
-         <tbody>
-         <tr>
-            <td style='color:white'>" . $Cartucho . "</td>
-            <td style='color:white'>" . implode($Usuario) . "</td>
-         <tr>
-
-      </tbody>
-      ");
+             echo "
+                 <tbody>
+                     <tr>
+                         <td style='color:white'>" .
+                             $Cartucho .
+                             "</td>
+                         <td style='color:white'>" .
+                             (is_array($Usuario) ? implode($Usuario) : $Usuario) .
+                             "</td>
+                     <tr>
+                 </tbody>
+             ";
          }
-      } else if (isset($_POST['Search']) && trim($_POST['Search']) !== "") {
-         echo ("
+     } elseif (isset($_POST["Search"]) && trim($_POST["Search"]) !== "") {
+          echo "
  <tbody>
  <tr>
-    <td>" . $Cartucho . "</td>
+    <td>" .
+              $Cartucho .
+              "</td>
     <td>Não encontrado</td>
  <tr>
 
 </tbody>
-");
+";
       }
       ?>
    </table>
 <!--Qual é o cartucho mais antigo? Quem é o dono?-->
 <div style="margin-left:3em;margin-top:2em">
 <?php
-
-$resultado = mysqli_query($conexao, "SELECT MIN(ano) AS min_ano FROM `registergame`");
+$resultado = mysqli_query(
+    $conexao,
+    "SELECT MIN(ano) AS min_ano FROM `registergame`"
+);
 
 if ($resultado) {
-   $linha = mysqli_fetch_assoc($resultado);
-   $min_ano = $linha['min_ano'];
+    $linha = mysqli_fetch_assoc($resultado);
+    $min_ano = $linha["min_ano"];
 
-   $UsuID = mysqli_query($conexao, "SELECT `UsuarioID` FROM `registergame` WHERE Ano ='$min_ano'");
-   $UserMin='';
-   foreach($UsuID as $key =>$value){
-  foreach ($value as $valu){
-   
-   if ($Usu = mysqli_query($conexao, "SELECT `Usuario` FROM `login` WHERE ID ='$valu'")){
-      $Usu = trim($Usu->fetch_column());
-$UserMin.=$Usu;
-   }
-  }
-  $UserMin.=' ';
-   }
-   $UserMin= explode(' ',$UserMin);
-   $UserMin = array_unique($UserMin);
-   $UserMin = implode(',',$UserMin);   
-  
-   echo ('<p style="color:white">'."O menor ano encontrado na tabela é: " . $min_ano . " e o(s) Usuario(s) do Game é/São: " . rtrim($UserMin,',').'</p>');
+    $UsuID = mysqli_query(
+        $conexao,
+        "SELECT `UsuarioID` FROM `registergame` WHERE Ano ='$min_ano'"
+    );
+    $UserMin = "";
+    foreach ($UsuID as $key => $value) {
+        foreach ($value as $valu) {
+            if (
+                $Usu = mysqli_query(
+                    $conexao,
+                    "SELECT `Usuario` FROM `login` WHERE ID ='$valu'"
+                )
+            ) {
+                $Usu = trim($Usu->fetch_column());
+                $UserMin .= $Usu;
+            }
+        }
+        $UserMin .= " ";
+    }
+    $UserMin = explode(" ", $UserMin);
+    $UserMin = array_unique($UserMin);
+    $UserMin = implode(",", $UserMin);
+
+    echo '<p style="color:white">' .
+        "O menor ano encontrado na tabela é: " .
+        $min_ano .
+        " e o(s) Usuario(s) do Game é/São: " .
+        rtrim($UserMin, ",") .
+        "</p>";
 } else {
-   echo "Erro ao consultar o banco de dados";
+    echo "Erro ao consultar o banco de dados";
 }
 ?>
 
@@ -141,21 +168,35 @@ $UserMin.=$Usu;
 </form>
 
 
-   <?php 
+   <?php
+   //  número de games para uma dada plataforma/sistema.
+   if (isset($_POST["System"])) {
+       $System = $_POST["System"];
+       $CountGames = mysqli_query(
+           $conexao,
+           "SELECT count(Titulo) FROM `registergame` WHERE `Plataforma` = '$System'"
+       );
+       $CountGames = $CountGames->fetch_column();
+       echo '<p style="color:white">' .
+           "O número de Cartuchos com o sistema: " .
+           $System .
+           " é: " .
+           $CountGames .
+           "</p>";
+   }
 
-    //  número de games para uma dada plataforma/sistema.
-    if(isset($_POST['System'])){
-    $System =$_POST['System'];
-    $CountGames = mysqli_query($conexao, "SELECT count(Titulo) FROM `registergame` WHERE `Plataforma` = '$System'");
-    $CountGames = $CountGames -> fetch_column();
-   echo('<p style="color:white">'.'O número de Cartuchos com o sistema: '.$System.' é: '.$CountGames).'</p>';
-   } 
-  
-mysqli_close($conexao);
+   mysqli_close($conexao);
    ?>
+
+<h3 style="color:white; margin-top:2em">Relatório de todos os Usuarios e seus jogos:</h3>
+<a class="nav-link active" aria-current="page" href="" style="color:gold;"><form action="/pdf.php" method="post">
+         <input type="hidden" name="IDUSER" value="admin"  >
+         <input type="submit" value="Seus Jogos (PDF)"  style="color:gold; background:none">
+         </form></a>
+</div>
 </div>
 
-</div>
+
 </body>
 
 </html>
