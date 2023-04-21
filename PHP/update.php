@@ -114,21 +114,21 @@ if (!empty($_POST["UpdateHidden"]) || !empty($_SESSION["GameID"])) {
        echo $row["Titulo"];
    } elseif (isset($_POST["NameGameUP"])) {
        echo $_POST["NameGameUP"];
-   } ?>" name="NameGameUP">
+   } ?>" name="NameGameUP" required>
   <input value="<?php if (isset($row["Ano"])) {
       echo $row["Ano"];
   } elseif (isset($_POST["YearGameUP"])) {
       echo $_POST["YearGameUP"];
-  } ?>" name="YearGameUP">
+  } ?>" name="YearGameUP" required>
   <input value="<?php if (isset($row["Plataforma"])) {
       echo $row["Plataforma"];
   } elseif (isset($_POST["SystemGameUP"])) {
       echo $_POST["SystemGameUP"];
-  } ?>" name="SystemGameUP">
-  <input type="file"  name="ImageGameUP">
+  } ?>" name="SystemGameUP" required>
+  <input type="file"  name="ImageGameUP" required>
   <input type="hidden" value ="<?php echo $_SESSION[
       "GameID"
-  ]; ?>" name="IDgame">
+  ]; ?>" name="IDgame" required>
   <input type="submit" class="botaoUp" value="Enviar">
          </form>
 </body>

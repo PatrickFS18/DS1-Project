@@ -120,6 +120,7 @@
          
 <div class="container" style="margin-bottom:4em">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner" style="margin-bottom: 2em;">
  <ol class="carousel-indicators" hidden>
 <?php
 $contador = 0;
@@ -130,49 +131,53 @@ while ($contador!==count($ResultCount)){ if($contador==0){?>
   
 <?php }$contador=$contador+1;}?>
 </ol>
+
 <?php
 $contador = 0;
 $Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$UserID[ID]' ");
            
 while ($Result = $Games->fetch_assoc()){ if($contador==0){?>
-  <div class="carousel-inner" style="margin-bottom: 2em;">
+  
     <div class="item active card-body p-4" style="text-align:center" >
     <img src="<?php echo $Result["Image"]; ?>" alt="GameImage"  style="width:18em;height:15em;margin-left:18.6em">
-    <h3 class="fw-bolder"><?php echo $Result["Titulo"]; ?></h3>
-<span class="console"><i class="fa-brands fa-playstation fa-beat"></i>
-                                 <?php echo ($Result["Plataforma"]); ?>
-                                 <i class="fa-brands fa-playstation fa-beat"></i>
-                                 </span>
-                                 <div >
-<form action="remove.php" method="post">
-               <button class="botao" value="<?php echo $Result["ID"]?>" name="Delete" >Delete</button>
-            <form id ="buttons" method="post" action="update.php">
-               <input type = "hidden" id="inputHidden" name="UpdateHidden" value="<?php echo $Result["ID"]; ?>"> 
-               <button class="botaoUp">Update</button>
-            </form>
-</form>
-</div>
-                              </div>
-
-<?php $contador=$contador+1;}else{ ?>
-
-   <div class="item" style="text-align:center">
-<img src="<?php echo $Result["Image"]; ?>" alt="GameImage"   style="width:18em;height:15em;margin-left:18.6em">
-<h3 class="fw-bolder"><?php echo $Result["Titulo"]; ?></h3>
-<span class="console"><i class="fa-brands fa-playstation fa-beat"></i>
+    <h1 class="fw-bolder"><?php echo $Result["Titulo"]; ?></h1>
+<span class="fw-bolder"><i class="fa-brands fa-playstation fa-beat"></i>
                                  <?php echo ($Result["Plataforma"]); ?>
                                  <i class="fa-brands fa-playstation fa-beat"></i>
                                  </span>
                                  <div>
-<form action="remove.php" method="post">
+                                    <div style=" display: inline;">
+<form action="remove.php" method="post" style="margin-right:10em">
                <button class="botao" value="<?php echo $Result["ID"]?>" name="Delete" >Delete</button>
-            <form id ="buttons" method="post" action="update.php">
+               </form>
+            <form id ="buttons" method="post" action="update.php" style="margin-right:-10em;margin-top:-2.1em">
                <input type = "hidden" id="inputHidden" name="UpdateHidden" value="<?php echo $Result["ID"]; ?>"> 
                <button class="botaoUp">Update</button>
             </form>
-</form>
+            </div>
 </div>
+                              </div>
+
+<?php $contador=$contador+1;}else{ ?>
+  
+   <div class="item" style="text-align:center">
+   <img src="<?php echo $Result["Image"]; ?>" alt="GameImage"  style="width:18em;height:15em;margin-left:18.6em">
+    <h1 class="fw-bolder"><?php echo $Result["Titulo"]; ?></h1>
+<span class="fw-bolder"><i class="fa-brands fa-playstation fa-beat"></i>
+                                 <?php echo ($Result["Plataforma"]); ?>
+                                 <i class="fa-brands fa-playstation fa-beat"></i>
+                                 </span>
+                                 <div >
+<form action="remove.php" method="post" style="margin-right:10em">
+               <button class="botao" value="<?php echo $Result["ID"]?>" name="Delete" >Delete</button>
+               </form>
+            <form id ="buttons" method="post" action="update.php" style="margin-right:-10em;margin-top:-2.1em">
+               <input type = "hidden" id="inputHidden" name="UpdateHidden" value="<?php echo $Result["ID"]; ?>"> 
+               <button class="botaoUp">Update</button>
+            </form>
+
 </div>
+                              </div>
 
 <?php
 }}?>
@@ -185,7 +190,7 @@ while ($Result = $Games->fetch_assoc()){ if($contador==0){?>
     <span class="sr-only">Next</span>
   </a>
 </div> 
-
+</div>
 <!--colocar aqui o codigo excluido se nn der certo-->
 
        
