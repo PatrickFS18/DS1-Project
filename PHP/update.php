@@ -143,10 +143,10 @@ if (!empty($_POST["UpdateHidden"]) || !empty($_SESSION["GameID"])) {
         $SystemGame = $_POST["SystemGameUP"];
         var_dump($_POST["IDgame"]);
         $tela = $_FILES["ImageGameUP"];
-        $dir = "";
-        $nameimage = $dir . time() . ".jpg";
-        $nameimageBD = time() . ".jpg";
-        move_uploaded_file($tela["tmp_name"], $nameimage); //Fazer upload do arquivo
+        $dir = "../Image/ImageBD/";
+        $nameimage = $dir . $NameGame . $YearGame . $SystemGame . ".jpg";
+        $nameimageBD = $dir . $NameGame . $YearGame . $SystemGame .".jpg";
+       move_uploaded_file($tela["tmp_name"], $nameimage); //Fazer upload do arquivo
         $Insert = "UPDATE `registergame` SET `Titulo`= '$NameGame', `Plataforma` = '$SystemGame', `Ano` = '$YearGame', `Image`= '$nameimageBD' WHERE `ID` = '$GameID'";
 
         if (mysqli_query($conexao, $Insert)) { 

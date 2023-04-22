@@ -22,10 +22,10 @@ if (
         $YearGame = $_POST["YearGame"];
         $SystemGame = $_POST["SystemGame"];
         $tela = $_FILES["Img"];
-        $dir = "";
-        $nameimage = $dir . time() . ".jpg";
-        $nameimageBD = time() . ".jpg";
-        move_uploaded_file($tela["tmp_name"], $nameimage); //Fazer upload do arquivo
+        $dir = "../Image/ImageBD/";
+        $nameimage = $dir . $NameGame . $YearGame . $SystemGame . ".jpg";
+        $nameimageBD = $dir . $NameGame . $YearGame . $SystemGame .".jpg";
+       move_uploaded_file($tela["tmp_name"], $nameimage); //Fazer upload do arquivo
         $Insert = mysqli_prepare(
             $conexao,
             "INSERT INTO `registergame` (`Titulo`,`Plataforma`,`Ano`,`Image`,`UsuarioID`) VALUES (?, ?, ?, ?, ?)"
