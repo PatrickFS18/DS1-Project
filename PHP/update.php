@@ -126,7 +126,7 @@ ul {
   <input type="text" value="<?php echo $row["Plataforma"]; ?>" name="SystemGameUP" required>
 
 </li>
-  <input type="file"  name="ImageGameUP">
+  <input type="file"  name="ImageGameUP" required>
   <input type="hidden" value ="<?php echo $_SESSION["GameID"]; ?>" name="IDgame">
 
   <input type="hidden" value ="<?php echo $row["Image"]; ?>" name="ImgBD">
@@ -145,15 +145,13 @@ ul {
         $NameGame = $_POST["NameGameUP"];
         $YearGame = $_POST["YearGameUP"];
         $SystemGame = $_POST["SystemGameUP"];
-        $NameGameIMG = str_replace(' ', '', $NameGame);
-        $YearGameIMG = str_replace(' ', '', $YearGame);
-        $SystemGameIMG = str_replace(' ', '', $SystemGame);
         $tela = $_FILES["ImageGameUP"];
         $dir = "../Image/ImageBD/";
         if(isset($tela)){
-            $nameimage = $dir . $NameGameIMG . $YearGameIMG . $SystemGameIMG . ".jpg";
-            $nameimageBD = $dir . $NameGameIMG . $YearGameIMG . $SystemGameIMG .".jpg";
-              move_uploaded_file($tela["tmp_name"], $nameimage); //Fazer upload do arquivo
+            $nameimage = $dir . $NameGame . $YearGame . $SystemGame . ".jpg";
+            $nameimageBD = $dir . $NameGame . $YearGame . $SystemGame .".jpg";
+           
+            move_uploaded_file($tela["tmp_name"], $nameimage); //Fazer upload do arquivo
         
             $Insert = "UPDATE `registergame` SET `Titulo`= '$NameGame', `Plataforma` = '$SystemGame', `Ano` = '$YearGame', `Image`= '$nameimageBD' WHERE `ID` = '$GameID'";
 

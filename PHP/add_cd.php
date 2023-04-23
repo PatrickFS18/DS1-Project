@@ -21,12 +21,10 @@ if (
         $NameGame = $_POST["NameGame"];
         $YearGame = $_POST["YearGame"];
         $SystemGame = $_POST["SystemGame"];
-        $NameGame = str_replace(' ', '', $NameGame);
-        $YearGame = str_replace(' ', '', $YearGame);
-        $SystemGame = str_replace(' ', '', $SystemGame);
         $tela = $_FILES["Img"];
         $dir = "../Image/ImageBD/";
-        $nameimageBD = $dir .md5(uniqid()). ".jpg";
+        $nameimage = $dir . $NameGame . $YearGame . $SystemGame . ".jpg";
+        $nameimageBD = $dir . $NameGame . $YearGame . $SystemGame .".jpg";
          move_uploaded_file($tela["tmp_name"], $nameimageBD); //Fazer upload do arquivo
         $Insert = mysqli_prepare(
             $conexao,
