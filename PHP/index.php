@@ -80,7 +80,7 @@
             </div>
          </div>
          <a href="/PHP/SessionRestart.php" class="btn btn-outline-danger" style="margin-right:1em">
-         <span class="glyphicon glyphicon-log-out"></span> <i class="fa fa-sign-out" aria-hidden="true" style="margin-right:5px"></i></a>
+         <i class="fa fa-sign-out" aria-hidden="true" style="margin-right:5px"></i></a>
       </nav>
       <!-- Header-->
       <header class=" py-5" style="background-color:darkgoldenrod">
