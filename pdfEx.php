@@ -24,7 +24,8 @@ while ($Result = $Games->fetch_assoc()) {
     $conteudo_pdf.=' <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >';
     $conteudo_pdf.='     <div class="col mb-5 border border-warning">';
     $conteudo_pdf.='        <div class="card h-30">';
-    $conteudo_pdf.='              <img class="card-img-top" src="'.$Result["Image"].'" alt="..." />';
+    $conteudo_pdf.= '<img class="card-img-top" src="../Image/ImageBD/'.$Result["Image"].'" alt="..." />';
+    $conteudo_pdf.=' <h1> O qvc procura:'.$Result["Image"].'</h1>:';
     $conteudo_pdf.='               <div class="card-body p-4">';
     $conteudo_pdf.='                  <div class="text-center">';
     $conteudo_pdf.='                    <h5 class="fw-bolder">'.$Result["Titulo"].'';
@@ -50,7 +51,7 @@ $conteudo_pdf_array[] = $conteudo_pdf;
 
 use Dompdf\Dompdf;
 
-$dompdf = new Dompdf();
+$dompdf = new Dompdf(['enable_remote' =>true]);
 
 foreach($conteudo_pdf_array as $conteudo) {
     $dompdf->loadHtml($conteudo);
