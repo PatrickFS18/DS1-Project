@@ -108,39 +108,26 @@ ul {
       <a href="/PHP/SessionRestart.php" class="btn btn-outline-danger" style="margin-right:1em">
          <span class="glyphicon glyphicon-log-out"></span> <i class="fa fa-sign-out" aria-hidden="true" style="margin-right:5px"></i></a>
    </nav>
-<div id="UpdateForm">
+   <div id="UpdateForm">
            <form id='update' method="post" action="update.php" enctype="multipart/form-data"> 
            <ul>
   <li style="margin-bottom: 10px;">
     <label for="NameGameUP" style="font-family: Arial, sans-serif; font-weight: bold; display: inline-block; width: 80px;">Título:</label>
 
-<input value="<?php if (isset($row["Titulo"])) {
-       echo $row["Titulo"];
-   } elseif (isset($_POST["NameGameUP"])) {
-       echo $_POST["NameGameUP"];
-   } ?>" name="NameGameUP" required>
+<input type="text" value="<?php echo $row["Titulo"]; ?>" name="NameGameUP" required>
 </li>
   <li style="margin-bottom: 10px;">
   <label for="YearGameUP" style="font-family: Arial, sans-serif; font-weight: bold; display: inline-block; width: 80px;">Ano:</label>
-  <input value="<?php if (isset($row["Ano"])) {
-      echo $row["Ano"];
-  } elseif (isset($_POST["YearGameUP"])) {
-      echo $_POST["YearGameUP"];
-  } ?>" name="YearGameUP" required>
+  <input type="text" value="<?php echo $row["Ano"]; ?>" name="YearGameUP" required>
 
 </li>
   <li style="margin-bottom: 10px;">
   <label for="SystemGameUP" style="font-family: Arial, sans-serif; font-weight: bold; display: inline-block; width: 80px;">Plataforma:</label>
-  <input value="<?php if (isset($row["Plataforma"])) {
-      echo $row["Plataforma"];
-  } elseif (isset($_POST["SystemGameUP"])) {
-      echo $_POST["SystemGameUP"];
-  } ?>" name="SystemGameUP" required>
+  <input type="text" value="<?php echo $row["Plataforma"]; ?>" name="SystemGameUP" required>
 
 </li>
- 
   <input type="file"  name="ImageGameUP">
-  <input type="hidden" value ="<?php echo $_SESSION["GameID"]; ?>" name="IDgame" required>
+  <input type="hidden" value ="<?php echo $_SESSION["GameID"]; ?>" name="IDgame">
 
   <input type="hidden" value ="<?php echo $row["Image"]; ?>" name="ImgBD">
 
@@ -152,10 +139,9 @@ ul {
 </body>
 </html>
 
-<?php if (
-    isset($_POST["YearGameUP"], $_POST["SystemGameUP"], $_POST["NameGameUP"]) AND (isset($_POST["ImgBD"]) or isset($_FILES["ImageGameUP"])))
- {
-    if (!empty($_SESSION["GameID"])) {
+<?php if (!empty($_POST["IDgame"]))
+    {
+        $GameID = $_POST["IDgame"];
         $NameGame = $_POST["NameGameUP"];
         $YearGame = $_POST["YearGameUP"];
         $SystemGame = $_POST["SystemGameUP"];
@@ -164,24 +150,23 @@ ul {
         $SystemGameIMG = str_replace(' ', '', $SystemGame);
         $tela = $_FILES["ImageGameUP"];
         $dir = "../Image/ImageBD/";
-        if($tela["name"]!==''){
-            $nameimageBD = $dir .md5(uniqid()). ".jpg";
-            move_uploaded_file($tela["tmp_name"], $nameimageBD); //Fazer upload do arquivo
+        if(isset($tela)){
+            $nameimage = $dir . $NameGameIMG . $YearGameIMG . $SystemGameIMG . ".jpg";
+            $nameimageBD = $dir . $NameGameIMG . $YearGameIMG . $SystemGameIMG .".jpg";
+              move_uploaded_file($tela["tmp_name"], $nameimage); //Fazer upload do arquivo
+        
             $Insert = "UPDATE `registergame` SET `Titulo`= '$NameGame', `Plataforma` = '$SystemGame', `Ano` = '$YearGame', `Image`= '$nameimageBD' WHERE `ID` = '$GameID'";
-            if (mysqli_query($conexao, $Insert)) { 
-                header("Location:/PHP/index.php?msg=Y");
-            
-            }
+
         }else{
-            
             $Insert = "UPDATE `registergame` SET `Titulo`= '$NameGame', `Plataforma` = '$SystemGame', `Ano` = '$YearGame' WHERE `ID` = '$GameID'";
-            if (mysqli_query($conexao, $Insert)) { 
-                header("Location:/PHP/index.php?msg=Y");
-            
-            }
+
         } 
 
-   
+        if (mysqli_query($conexao, $Insert)) { 
+         header("Location:/PHP/index.php?msg=Y");
+        
+     
+     
     }
 }
 ?>
