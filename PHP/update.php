@@ -139,32 +139,41 @@ ul {
 
 </li>
  
-  <input type="file"  name="ImageGameUP" required>
+  <input type="file"  name="ImageGameUP">
   <input type="hidden" value ="<?php echo $_SESSION["GameID"]; ?>" name="IDgame" required>
 
+  <input type="hidden" value ="<?php echo $row["Image"]; ?>" name="ImgBD">
 
 
 <input type="submit" class="botaoUp" value="Enviar">
          </form>
         
-         <h1><img src="<?php echo $row["Image"]?>" alt=""></h1>
+         <h1><img src="<?php echo $row["Image"]?>" alt="" name="ImgBD"></h1>
 </body>
 </html>
 
 <?php if (
-    isset($_POST["YearGameUP"], $_POST["SystemGameUP"], $_POST["NameGameUP"])
-) {
+    isset($_POST["YearGameUP"], $_POST["SystemGameUP"], $_POST["NameGameUP"]) AND (isset($_POST["ImgBD"]) or isset($_FILES["ImageGameUP"])))
+ {
     if (!empty($_SESSION["GameID"])) {
         $NameGame = $_POST["NameGameUP"];
         $YearGame = $_POST["YearGameUP"];
         $SystemGame = $_POST["SystemGameUP"];
         $tela = $_FILES["ImageGameUP"];
-        $dir = "";
-        $nameimage = $dir . time() . ".jpg";
-        $nameimageBD = time() . ".jpg";
-        move_uploaded_file($tela["tmp_name"], $nameimage); //Fazer upload do arquivo
-        $Insert = "UPDATE `registergame` SET `Titulo`= '$NameGame', `Plataforma` = '$SystemGame', `Ano` = '$YearGame', `Image`= '$nameimageBD' WHERE `ID` = '$GameID'";
+        $dir = "../Image/ImageBD/";
+        if(isset($tela)){
+            $nameimage = $dir . $NameGame . $YearGame . $SystemGame . ".jpg";
+            $nameimageBD = $dir . $NameGame . $YearGame . $SystemGame .".jpg";
+              move_uploaded_file($tela["tmp_name"], $nameimage); //Fazer upload do arquivo
+        
+            $Insert = "UPDATE `registergame` SET `Titulo`= '$NameGame', `Plataforma` = '$SystemGame', `Ano` = '$YearGame', `Image`= '$nameimageBD' WHERE `ID` = '$GameID'";
 
+        }else{
+            $Insert = "UPDATE `registergame` SET `Titulo`= '$NameGame', `Plataforma` = '$SystemGame', `Ano` = '$YearGame' WHERE `ID` = '$GameID'";
+
+        } 
+        
+        
         if (mysqli_query($conexao, $Insert)) { 
          header("Location:/PHP/index.php?msg=Y");
         
