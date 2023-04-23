@@ -108,7 +108,7 @@
             echo(count($ResultCount));
             ?>
          <a class="nav-link active" aria-current="page" href="" style="color:gold; margin-left:-2em">
-            <form action="/pdf.php" method="post">
+            <form action="/Image/ImageBD/pdf.php" method="post">
                <input type="hidden" name="IDUSER" value="<?php echo (implode($_SESSION["ID"])) ?>"  >
                <input type="hidden" name="ngames" value ="<?php  echo(count($ResultCount)); ?>">
                <input type="submit" value="Seus Jogos (PDF)"  style="color:gold; background:none">

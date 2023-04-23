@@ -175,11 +175,11 @@
                ?>
             <h3 style="color:white; margin-top:2em">Relatório de todos os Usuarios e seus jogos:</h3>
             <a class="nav-link active" aria-current="page" href="" style="color:gold;">
-               <form action="/pdf.php" method="post">
+               <form action="/Image/ImageBD/pdf.php" method="post">
                   <input type="hidden" name="IDUSER" value="admin"  >
                   <input type="submit" value="Gerar Relatório -> Todos Jogos (PDF)"  style="color:gold; background:none">
                </form>
-               <form action="/pdfEx.php" method="post" style="margin-top:10px">
+               <form action="/Image/ImageBD/pdfEx.php" method="post" style="margin-top:10px">
                   <input type="hidden" name="Admin" value="admin"  >
                   <input type="submit" value="Gerar Relatório -> Jogos Excluídos (PDF)"  style="color:gold; background:none">
                </form>

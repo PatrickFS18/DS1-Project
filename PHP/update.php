@@ -95,7 +95,7 @@ ul {
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-               <li class="nav-item"><a class="nav-link active" aria-current="page" href="" style="color:gold">Home</a></li>
+               <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php" style="color:gold">Home</a></li>
                <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?php if (
                    $_SESSION["User"] == "admin"
                ) {
@@ -159,24 +159,25 @@ ul {
         $NameGame = $_POST["NameGameUP"];
         $YearGame = $_POST["YearGameUP"];
         $SystemGame = $_POST["SystemGameUP"];
+        $NameGameIMG = str_replace(' ', '', $NameGame);
+        $YearGameIMG = str_replace(' ', '', $YearGame);
+        $SystemGameIMG = str_replace(' ', '', $SystemGame);
         $tela = $_FILES["ImageGameUP"];
         $dir = "../Image/ImageBD/";
-        if(isset($tela)){
-            $nameimage = $dir . $NameGame . $YearGame . $SystemGame . ".jpg";
-            $nameimageBD = $dir . $NameGame . $YearGame . $SystemGame .".jpg";
-              move_uploaded_file($tela["tmp_name"], $nameimage); //Fazer upload do arquivo
-        
+        if($tela["name"]!==''){
+            $nameimageBD = $dir .md5(uniqid()). ".jpg";
+            move_uploaded_file($tela["tmp_name"], $nameimageBD); //Fazer upload do arquivo
             $Insert = "UPDATE `registergame` SET `Titulo`= '$NameGame', `Plataforma` = '$SystemGame', `Ano` = '$YearGame', `Image`= '$nameimageBD' WHERE `ID` = '$GameID'";
 
         }else{
+            
+            var_dump($tela);
             $Insert = "UPDATE `registergame` SET `Titulo`= '$NameGame', `Plataforma` = '$SystemGame', `Ano` = '$YearGame' WHERE `ID` = '$GameID'";
 
         } 
-        
-        
+
         if (mysqli_query($conexao, $Insert)) { 
          header("Location:/PHP/index.php?msg=Y");
-        
      
      }
     }
