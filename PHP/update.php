@@ -168,18 +168,20 @@ ul {
             $nameimageBD = $dir .md5(uniqid()). ".jpg";
             move_uploaded_file($tela["tmp_name"], $nameimageBD); //Fazer upload do arquivo
             $Insert = "UPDATE `registergame` SET `Titulo`= '$NameGame', `Plataforma` = '$SystemGame', `Ano` = '$YearGame', `Image`= '$nameimageBD' WHERE `ID` = '$GameID'";
-
+            if (mysqli_query($conexao, $Insert)) { 
+                header("Location:/PHP/index.php?msg=Y");
+            
+            }
         }else{
             
-            var_dump($tela);
             $Insert = "UPDATE `registergame` SET `Titulo`= '$NameGame', `Plataforma` = '$SystemGame', `Ano` = '$YearGame' WHERE `ID` = '$GameID'";
-
+            if (mysqli_query($conexao, $Insert)) { 
+                header("Location:/PHP/index.php?msg=Y");
+            
+            }
         } 
 
-        if (mysqli_query($conexao, $Insert)) { 
-         header("Location:/PHP/index.php?msg=Y");
-     
-     }
+   
     }
 }
 ?>
