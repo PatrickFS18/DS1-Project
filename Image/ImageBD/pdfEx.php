@@ -25,27 +25,15 @@ while ($Result = $Games->fetch_assoc()) {
 $type = pathinfo($path, PATHINFO_EXTENSION);
 $data = file_get_contents($path);
 $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    $conteudo_pdf.='<div class="container px-4 px-lg-5 mt-5">';
-    $conteudo_pdf.=' <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >';
-    $conteudo_pdf.='     <div class="col mb-5 border border-warning">';
-    $conteudo_pdf.='        <div class="card h-30">';
-    $conteudo_pdf.= '         <h1><img src="'.$base64.'" width="150" height="150"/></h1>';
-    $conteudo_pdf.='               <div class="card-body p-4">';
-    $conteudo_pdf.='                  <div class="text-center">';
-    $conteudo_pdf.='                    <h5 class="fw-bolder">'.$Result["Titulo"].'';
-    $conteudo_pdf.='                    </h5>';
-    $conteudo_pdf.='                      <p>';
-    $conteudo_pdf.='                       <span class="console"><i class="fa-brands fa-playstation fa-beat"></i>';
-    $conteudo_pdf.='                                      '.$Result["Plataforma"].'';
-    $conteudo_pdf.='    <i class="fa-brands fa-playstation fa-beat"></i>';
-    $conteudo_pdf.='                        </span>';
-    $conteudo_pdf.='                    </p>';
-    $conteudo_pdf.='                 </div>';
-    $conteudo_pdf.='              </div>';
-    $conteudo_pdf.='          </div>';
-    $conteudo_pdf.='        </div>';
-    $conteudo_pdf.='       </div>';
-    $conteudo_pdf.='       <br><br>';
+    $conteudo_pdf.='<div class="card" style="width: 18rem;">';
+    $conteudo_pdf.='<img src="'.$base64.'" class="card-img-top" style="width:150px;height:150px">';
+    $conteudo_pdf.='<div class="card-body">';
+    $conteudo_pdf.='<h5 class="card-title">'.$Result["Titulo"].'</h5>';
+    $conteudo_pdf.='<p class="card-text">'.$Result["Plataforma"].'</p>';
+    $conteudo_pdf.='</div>';
+    $conteudo_pdf.='</div>';
+    $conteudo_pdf.='<br><br>';
+    
     
     $jogos_count++;
 }

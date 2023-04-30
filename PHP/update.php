@@ -161,10 +161,12 @@ ul {
         } 
 
         if (mysqli_query($conexao, $Insert)) { 
-        ?> <script> // erro ao usar header("location:/PHP/index.php");. substituido por script
+        ?> 
+        <script> // erro ao usar header("location:/PHP/index.php");. substituido por script
               let url = window.location.href;
          window.location.href = "index.php?msg=Y";
-        </script>   <?php
+        </script> 
+        <?php
         
 
     }

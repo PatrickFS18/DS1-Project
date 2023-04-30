@@ -14,7 +14,25 @@ $conteudo_pdf_array = array();
 
 $jogos_count = 0;
 
-$conteudo_pdf = '';
+$conteudo_pdf = '<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Login</title>
+      <link rel="stylesheet" href="/Css/login.css">
+      <link rel="stylesheet" href="/Css/LoginBackground.css">
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+         id="bootstrap-css">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+         id="bootstrap-css">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   </head>
+   <body>';
 if($Games){
 while ($Result = $Games->fetch_assoc()) {
     if ($jogos_count == $max_jogos_por_pagina) {
@@ -28,32 +46,19 @@ while ($Result = $Games->fetch_assoc()) {
 $type = pathinfo($path, PATHINFO_EXTENSION);
 $data = file_get_contents($path);
 $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    $conteudo_pdf.='<div class="container px-4 px-lg-5 mt-5">';
-    $conteudo_pdf.=' <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >';
-    $conteudo_pdf.='     <div class="col mb-5 border border-warning">';
-    $conteudo_pdf.='        <div class="card h-30">';
-    $conteudo_pdf.= '         <h1><img src="'.$base64.'" width="150" height="150"/></h1>';
-
-    $conteudo_pdf.='               <div class="card-body p-4">';
-    $conteudo_pdf.='                  <div class="text-center">';
-    $conteudo_pdf.='                    <h5 class="fw-bolder">'.$Result["Titulo"].'';
-    $conteudo_pdf.='                    </h5>';
-    $conteudo_pdf.='                      <p>';
-    $conteudo_pdf.='                       <span class="console"><i class="fa-brands fa-playstation fa-beat"></i>';
-    $conteudo_pdf.='                                      '.$Result["Plataforma"].'';
-    $conteudo_pdf.='    <i class="fa-brands fa-playstation fa-beat"></i>';
-    $conteudo_pdf.='                        </span>';
-    $conteudo_pdf.='                    </p>';
-    $conteudo_pdf.='                 </div>';
-    $conteudo_pdf.='              </div>';
-    $conteudo_pdf.='          </div>';
-    $conteudo_pdf.='        </div>';
-    $conteudo_pdf.='       </div>';
-    $conteudo_pdf.='       <br><br>';
+   
+    $conteudo_pdf.='<div class="card" style="width: 18rem;">';
+    $conteudo_pdf.='<img src="'.$base64.'" class="card-img-top" style="width:150px;height:150px">';
+    $conteudo_pdf.='<div class="card-body">';
+    $conteudo_pdf.='<h5 class="card-title">'.$Result["Titulo"].'</h5>';
+    $conteudo_pdf.='<p class="card-text">'.$Result["Plataforma"].'</p>';
+    $conteudo_pdf.='</div>';
+    $conteudo_pdf.='</div>';
+    $conteudo_pdf.='<br><br>';
     
     $jogos_count++;
 }
-
+$conteudo_pdf = '<!DOCTYPE html>';
 $conteudo_pdf_array[] = $conteudo_pdf;
 }
 }else{
@@ -97,27 +102,14 @@ $type = pathinfo($path, PATHINFO_EXTENSION);
 $data = file_get_contents($path);
 $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
     $conteudo_pdf .= '<h1>Dono: '.$Dono.'</h1>';
-    $conteudo_pdf.='<div class="container px-4 px-lg-5 mt-5">';
-    $conteudo_pdf.=' <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >';
-    $conteudo_pdf.='     <div class="col mb-5 border border-warning">';
-    $conteudo_pdf.='        <div class="card h-30">';
-    $conteudo_pdf.= '         <h1><img src="'.$base64.'" width="150" height="150"/></h1>';
-    $conteudo_pdf.='               <div class="card-body p-4">';
-    $conteudo_pdf.='                  <div class="text-center">';
-    $conteudo_pdf.='                    <h5 class="fw-bolder">'.$Result["Titulo"].'';
-    $conteudo_pdf.='                    </h5>';
-    $conteudo_pdf.='                      <p>';
-    $conteudo_pdf.='                       <span class="console"><i class="fa-brands fa-playstation fa-beat"></i>';
-    $conteudo_pdf.='                                      '.$Result["Plataforma"].'';
-    $conteudo_pdf.='    <i class="fa-brands fa-playstation fa-beat"></i>';
-    $conteudo_pdf.='                        </span>';
-    $conteudo_pdf.='                    </p>';
-    $conteudo_pdf.='                 </div>';
-    $conteudo_pdf.='              </div>';
-    $conteudo_pdf.='          </div>';
-    $conteudo_pdf.='        </div>';
-    $conteudo_pdf.='       </div>';
-    $conteudo_pdf.='       <br><br>';
+    $conteudo_pdf.='<div class="card" style="width: 18rem;">';
+    $conteudo_pdf.='<img src="'.$base64.'" class="card-img-top" style="width:150px;height:150px">';
+    $conteudo_pdf.='<div class="card-body">';
+    $conteudo_pdf.='<h5 class="card-title">'.$Result["Titulo"].'</h5>';
+    $conteudo_pdf.='<p class="card-text">'.$Result["Plataforma"].'</p>';
+    $conteudo_pdf.='</div>';
+    $conteudo_pdf.='</div>';
+    $conteudo_pdf.='<br><br>';
     
     $jogos_count++;
 }
