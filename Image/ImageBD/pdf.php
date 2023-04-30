@@ -8,7 +8,7 @@ $ngames= $_POST["ngames"];
 $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
 $Games = $conexao->query("SELECT * FROM `registergame` WHERE `UsuarioID`='$ID'");
 
-$max_jogos_por_pagina = 10;
+$max_jogos_por_pagina = 12;
 
 $conteudo_pdf_array = array();
 
@@ -63,7 +63,7 @@ $conteudo_pdf_array[] = $conteudo_pdf;
     $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
 $Games = $conexao->query("SELECT * FROM `registergame`");
 
-$max_jogos_por_pagina = 10;
+$max_jogos_por_pagina = 12;
 
 $conteudo_pdf_array = array();
 

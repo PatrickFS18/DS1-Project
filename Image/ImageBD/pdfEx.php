@@ -5,7 +5,7 @@ require '/Users/cliente/DS1-Project/DS1-Project/vendor/autoload.php';
 $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
 $Games = $conexao->query("SELECT * FROM `Historico` ORDER BY `DeleteAT` DESC");
 
-$max_jogos_por_pagina = 10;
+$max_jogos_por_pagina = 12;
 
 $conteudo_pdf_array = array();
 
