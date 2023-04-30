@@ -50,7 +50,8 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
     
     $jogos_count++;
 }
-$conteudo_pdf = '</body></html>';
+$conteudo_pdf .= '</body></html>';
+
 $conteudo_pdf_array[] = $conteudo_pdf;
 }
 use Dompdf\Dompdf;
