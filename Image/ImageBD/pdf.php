@@ -25,12 +25,6 @@ $conteudo_pdf = '<!DOCTYPE html>
       <link rel="stylesheet" href="/Css/LoginBackground.css">
       <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
          id="bootstrap-css">
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-      <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
-         id="bootstrap-css">
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    </head>
    <body>';
 if($Games){
@@ -58,7 +52,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
     
     $jogos_count++;
 }
-$conteudo_pdf = '<!DOCTYPE html>';
+$conteudo_pdf = '</body></html>';
 $conteudo_pdf_array[] = $conteudo_pdf;
 }
 }else{
@@ -75,7 +69,19 @@ $conteudo_pdf_array = array();
 
 $jogos_count = 0;
 
-$conteudo_pdf = '';
+$conteudo_pdf = '<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Login</title>
+      <link rel="stylesheet" href="/Css/login.css">
+      <link rel="stylesheet" href="/Css/LoginBackground.css">
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+         id="bootstrap-css">
+   </head>
+   <body>';
 if($Games){
 while ($Result = $Games->fetch_assoc()) {
     if ($jogos_count == $max_jogos_por_pagina) {
@@ -113,7 +119,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
     
     $jogos_count++;
 }
-
+$conteudo_pdf = '</body></html>';
 $conteudo_pdf_array[] = $conteudo_pdf;
 }
 }
