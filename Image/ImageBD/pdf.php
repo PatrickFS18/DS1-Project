@@ -20,9 +20,7 @@ $conteudo_pdf = '<!DOCTYPE html>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Login</title>
-      <link rel="stylesheet" href="/Css/login.css">
-      <link rel="stylesheet" href="/Css/LoginBackground.css">
+      <title>jogos</title>
       <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
          id="bootstrap-css">
    </head>
@@ -52,6 +50,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
     
     $jogos_count++;
 }
+$conteudo_pdf .= '</body></html>';
 $conteudo_pdf_array[] = $conteudo_pdf;
 }
 }else{
@@ -74,10 +73,8 @@ $conteudo_pdf = '<!DOCTYPE html>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Login</title>
-      <link rel="stylesheet" href="/Css/login.css">
-      <link rel="stylesheet" href="/Css/LoginBackground.css">
-      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+      <title>pdf</title>
+       <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
          id="bootstrap-css">
    </head>
    <body>';
