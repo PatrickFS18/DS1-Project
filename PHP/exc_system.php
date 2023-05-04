@@ -17,57 +17,48 @@
       <link rel="stylesheet" href="https://a.pub.network/core/pubfig/cls.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="Css/bootstrap.min.css">
-
       <style>
-        
-       
-
          form {
-            margin-left:29%;
-            border: 2px solid #ccc;
-            padding: 20px;
-            border-radius: 10px;
-            width: 500px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+         margin-left:29%;
+         border: 2px solid #ccc;
+         padding: 20px;
+         border-radius: 10px;
+         width: 500px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
          }
-
-
          label {
-            margin-bottom: 10px;
-            color:#380081;
+         margin-bottom: 10px;
+         color:#380081;
          }
          input[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-input[type="submit"]:hover {
-  background-color: rgba(76, 175, 80, 0.5);
-}
+         background-color: #4CAF50;
+         color: white;
+         padding: 10px 20px;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+         transition: background-color 0.3s;
+         }
+         input[type="submit"]:hover {
+         background-color: rgba(76, 175, 80, 0.5);
+         }
          input[type="radio"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: 2px solid #4CAF50;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  transition: 0.3s;
-  outline: none;
-}
-
-input[type="radio"]:checked {
-  background-color: #4CAF50;
-}
-
-        </style>
+         -webkit-appearance: none;
+         -moz-appearance: none;
+         appearance: none;
+         border: 2px solid #4CAF50;
+         border-radius: 50%;
+         width: 20px;
+         height: 20px;
+         transition: 0.3s;
+         outline: none;
+         }
+         input[type="radio"]:checked {
+         background-color: #4CAF50;
+         }
+      </style>
    </head>
    <body>
       <nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgb(0, 5, 19);">
@@ -78,46 +69,41 @@ input[type="radio"]:checked {
                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                   <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php" style="color:gold">Home</a></li>
                   <li class="nav-item"><a class="nav-link active" aria-current="page" href="add_sys-Home.php" style="color:white">Back</a></li>
-
                </ul>
             </div>
          </div>
          <a href="/PHP/SessionRestart.php" class="btn btn-outline-danger" style="margin-right:1em">
          <span class="glyphicon glyphicon-log-out"></span> <i class="fa fa-sign-out" aria-hidden="true" style="margin-right:5px"></i></a>
       </nav>
-      
-      
       <form action="" method="post" style="margin-top:1em">
-    <label for="SystemGame">Escolha o sistema que desejas excluir</label>
-      <select class="form-control" id="system" style="max-width: 49%;"  name="SystemExc" required>
-                  <?php
-                   $Plataforms = $conexao->query("SELECT `name` FROM `System`");
-                   $Plataforms=$Plataforms->fetch_all();
-                   $pos=0;
-                  while($Plataforms[$pos]!=null){
-                  ?>
-                   <option><?php echo implode($Plataforms[$pos]);
-                   ?>
-                  </option>
-                  <?php
+         <label for="SystemGame">Escolha o sistema que desejas excluir</label>
+         <select class="form-control" id="system" style="max-width: 49%;"  name="SystemExc" required>
+            <?php
+               $Plataforms = $conexao->query("SELECT `name` FROM `System`");
+               $Plataforms=$Plataforms->fetch_all();
+               $pos=0;
+               while($Plataforms[$pos]!=null){
+               ?>
+            <option><?php echo implode($Plataforms[$pos]);
+               ?>
+            </option>
+            <?php
                $pos=$pos+1;   
                } var_dump($Plataforms);
                   ?>
-               </select>
+         </select>
          <input  class="btn btn-tech" type="submit" value="Enviar" style="margin-top:10px">
       </form>
    </body>
 </html>
-
-
 <?php
-
-  $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
-  if(isset($_POST["SystemExc"])){
+($conexao = mysqli_connect("localhost", "root", "", "gamerx")) or
+    (print mysqli_connect_error());
+if (isset($_POST["SystemExc"])) {
     $SystemExc = $_POST["SystemExc"];
     $query = "DELETE FROM `System` WHERE `name` = '$SystemExc'";
     mysqli_query($conexao, $query);
     mysqli_close($conexao);
     header("location:/PHP/exc_system.php");
 }
-  ?>
+?>
