@@ -217,6 +217,19 @@ while ($Result = $Games->fetch_assoc()){ if($contador==0){?>
                   <option>Odyssey</option>
                   <option>MegaDrive</option>
                   <option>Atari</option>
+                  <?php
+                   $Plataforms = $conexao->query("SELECT `name` FROM `System`");
+                   $Plataforms=$Plataforms->fetch_all();
+                   $pos=0;
+                  while($Plataforms[$pos]!=null){
+                  ?>
+                   <option><?php echo implode($Plataforms[$pos]);
+                   ?>
+                  </option>
+                  <?php
+               $pos=$pos+1;   
+               } var_dump($Plataforms);
+                  ?>
                </select>
                <span class="select-arrow"></span>
             </div>

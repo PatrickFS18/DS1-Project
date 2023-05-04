@@ -1,4 +1,6 @@
 <?php
+  session_start();
+  $UserID = $_SESSION["ID"];
    ($conexao = mysqli_connect("localhost", "root", "", "gamerx")) or
        (print mysqli_connect_error()); ?>
 <!DOCTYPE html>
@@ -89,11 +91,11 @@ input[type="radio"]:checked {
       
       <form action="process_sys.php" method="post" style="margin-top:1em">
          <h2 style="color:white;margin-bottom:50px">Escolha uma opção:</h2>
-         <input type="radio" id="adicionar" name="opcao" value="adicionar">
+         <input type="radio" id="adicionar" name="System" value="adicionar">
          <label for="adicionar">Adicionar sistema</label><br>
-         <input type="radio" id="excluir" name="opcao" value="excluir">
+         <input type="radio" id="excluir" name="System" value="excluir">
          <label for="excluir">Excluir sistema</label><br>
-         <input type="radio" id="editar" name="opcao" value="editar">
+         <input type="radio" id="editar" name="System" value="editar">
          <label for="editar">Editar sistema</label><br>
          <br>
          <input  class="btn btn-tech" type="submit" value="Enviar">
