@@ -99,20 +99,23 @@ while ($Result = $Games->fetch_assoc()) {
       $Dono = 'Não encontrado';
     }
     //codificar para base64
+   
     $NomeImage = $Result["Image"];
     $NomeImage = basename($NomeImage);
     $path = $NomeImage;
 $type = pathinfo($path, PATHINFO_EXTENSION);
 $data = file_get_contents($path);
 $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-   
+
     $conteudo_pdf .= '<div class="matriz">';
     if($Dono!==$donoanterior){
         $conteudo_pdf.='<h1 class="card-text">Jogos de: '.$Dono.'</h1>';
         $donoanterior=$Dono;
     }
     $conteudo_pdf.='<div class="card" style="width: 18rem;">';
+
     $conteudo_pdf.='<img src="'.$base64.'" class="card-img-top">';
+
     $conteudo_pdf.='<div class="card-body">';
     $conteudo_pdf.='<h5 class="card-title">'.$Result["Titulo"].'</h5>';
     $conteudo_pdf.='<p class="card-text">'.$Result["Plataforma"].'</p>';

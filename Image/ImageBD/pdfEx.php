@@ -31,20 +31,45 @@ $conteudo_pdf = '<!DOCTYPE html>
    <h2 style="margin-left:35%;margin-bottom:1em">Order By Date  DESC</h2>
    ';
 if($Games){
+   $donoanterior=null;
 while ($Result = $Games->fetch_assoc()) {
+    $id = $Result["UsuarioID"];
+    if ($id) {
+      $Dono = $conexao->query("SELECT `Usuario` FROM `login` WHERE `ID` = '$id' ");
+      $Dono = $Dono->fetch_row();
+      $Dono = isset($Dono[0]) ? $Dono[0] : 'Não encontrado';
+    }
+    else {
+      
+      $Dono = 'Não encontrado';
+    }
     if ($jogos_count == $max_jogos_por_pagina) {
         $conteudo_pdf_array[] = $conteudo_pdf;
         $conteudo_pdf = '';
         $jogos_count = 0;
     }
+    if($Result["Image"]){
     $NomeImage = $Result["Image"];
     $NomeImage = basename($NomeImage);
     $path = $NomeImage;
 $type = pathinfo($path, PATHINFO_EXTENSION);
 $data = file_get_contents($path);
 $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    $conteudo_pdf.='<div class="card" style="width: 18rem;">';
+}else{
+    $Result["Image"]='';
+}
+
+if($Dono!==$donoanterior){
+    $conteudo_pdf.='<h1 class="card-text">Jogos Excluídos de: '.$Dono.'</h1>';
+    $donoanterior=$Dono;
+}
+   $conteudo_pdf.='<div class="card" style="width: 18rem;">';
+   if(isset($base64)){
     $conteudo_pdf.='<img src="'.$base64.'" class="card-img-top" style="width:150px;height:150px">';
+}else{
+    $conteudo_pdf.='<img src="" class="card-img-top" style="width:150px;height:150px">';
+}
+
     $conteudo_pdf.='<div class="card-body">';
     $conteudo_pdf.='<h5 class="card-title">'.$Result["Titulo"].'</h5>';
     $conteudo_pdf.='<p class="card-text">'.$Result["Plataforma"].'</p>';
