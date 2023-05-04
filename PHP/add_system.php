@@ -89,7 +89,7 @@ input[type="radio"]:checked {
       
       <form action="" method="post" style="margin-top:1em">
       <label for="sistema">Nome do Novo Sistema</label>
-      <input type="text" name="sistema">
+      <input type="text" name="sistema" required>
          <input  class="btn btn-tech" type="submit" value="Enviar" style="margin-top:10px">
       </form>
    </body>
@@ -101,7 +101,7 @@ input[type="radio"]:checked {
   $conexao = mysqli_connect("localhost", "root", "", "gamerx") or print(mysqli_connect_error());
   
 if(isset($_POST["sistema"])&& trim($_POST["sistema"])!==''){
-    $Plataforms = $conexao->query("SELECT `name` FROM `System` WHERE `name`=$_POST[sistema]"); 
+    $Plataforms = $conexao->query("SELECT `name` FROM `system` WHERE `name`='$_POST[sistema]'"); 
     $Plataforms= $Plataforms->fetch_row();
     if($Plataforms[0]!=$_POST["sistema"]){
   $Name= $_POST["sistema"];
