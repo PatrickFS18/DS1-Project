@@ -78,7 +78,8 @@
       <form action="" method="post" style="margin-top:1em">
          <label for="newname">Editar Sistema</label>
          <select class="form-control" id="system" style="max-width: 49%;margin-bottom:5px" name="SystemEdit" required>
-            <?php
+          <!-- Selecionar qual jogo deve editar-->
+          <?php
                $Plataforms = $conexao->query("SELECT `name` FROM `System`");
                $Plataforms = $Plataforms->fetch_all();
                $pos = 0;

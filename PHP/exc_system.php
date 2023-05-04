@@ -78,7 +78,10 @@
       <form action="" method="post" style="margin-top:1em">
          <label for="SystemGame">Escolha o sistema que desejas excluir</label>
          <select class="form-control" id="system" style="max-width: 49%;"  name="SystemExc" required>
-            <?php
+       
+         <!-- Selecionar qual jogo deve excluir -->
+         
+         <?php
                $Plataforms = $conexao->query("SELECT `name` FROM `System`");
                $Plataforms=$Plataforms->fetch_all();
                $pos=0;
