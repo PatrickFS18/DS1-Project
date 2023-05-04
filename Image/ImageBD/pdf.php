@@ -1,5 +1,5 @@
 <?php 
-require '/Users/User/Downloads/Projeto/vendor/autoload.php';
+require '/Users/cliente/DS1-Project/DS1-Project/vendor/autoload.php';
 $ID= $_POST["IDUSER"];
 if($ID !=="admin"){
     #GERAR PDF PRO USUARIO DE SEUS JOGOS
@@ -23,10 +23,10 @@ $conteudo_pdf = '<!DOCTYPE html>
       <title>jogos</title>
       <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
       id="bootstrap-css">
-      <link href="/Users/User/Downloads/Projeto/Image/ImageBD/pdfCss.css" rel="stylesheet">
+      <link href="C:\Users\cliente\DS1-Project\DS1-Project\Image\ImageBD\pdfCss.css" rel="stylesheet">
    </head>
    <body align="CENTER">
-    <h1 style=align="center"> Todos os jogos</h1>;
+    <h1 style=align="center"> Seus jogos</h1>;
     <div class="matriz">';
 if($Games){
     $count = 1;
@@ -79,12 +79,13 @@ $conteudo_pdf = '<!DOCTYPE html>
       <title>pdf</title>
        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
          id="bootstrap-css">
-         <link href="http://localhost/Projeto/ImageBD/pdfCss.css" rel="stylesheet">
+         <link href="C:\Users\cliente\DS1-Project\DS1-Project\Image\ImageBD\pdfCss.css" rel="stylesheet">
    </head>
    <body>
     ';
 if($Games){
         $count = 1;
+        $donoanterior=null;
 while ($Result = $Games->fetch_assoc()) {
     $id = $conexao->query("SELECT `UsuarioID` FROM `registergame` WHERE `Plataforma`='$Result[Plataforma]' AND `Titulo`= '$Result[Titulo]' ");
     $id = $id->fetch_row();
@@ -104,8 +105,12 @@ while ($Result = $Games->fetch_assoc()) {
 $type = pathinfo($path, PATHINFO_EXTENSION);
 $data = file_get_contents($path);
 $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    $conteudo_pdf .= '<h1> Todos os jogos de "'.$Dono.'"</h1>';
+   
     $conteudo_pdf .= '<div class="matriz">';
+    if($Dono!==$donoanterior){
+        $conteudo_pdf.='<h1 class="card-text">Jogos de: '.$Dono.'</h1>';
+        $donoanterior=$Dono;
+    }
     $conteudo_pdf.='<div class="card" style="width: 18rem;">';
     $conteudo_pdf.='<img src="'.$base64.'" class="card-img-top">';
     $conteudo_pdf.='<div class="card-body">';
@@ -114,6 +119,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
     $conteudo_pdf.='</div>';
     $conteudo_pdf.='</div>';
      $conteudo_pdf.='</div>';
+     
              if($count==15){
         $conteudo_pdf.="<br style='page-break-after: always;'/>";
     }

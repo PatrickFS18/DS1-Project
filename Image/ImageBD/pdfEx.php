@@ -18,11 +18,18 @@ $conteudo_pdf = '<!DOCTYPE html>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>PDF jogos excluidos</title>
+     
+      <link href="C:\Users\cliente\DS1-Project\DS1-Project\Image\ImageBD\pdfCss.css" rel="stylesheet">
+
       <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
          id="bootstrap-css">
      
    </head>
-   <body>';
+   <body>
+   <h1 style="margin-left:35%;margin-bottom:1em">Jogos Excluídos</h1>
+   
+   <h2 style="margin-left:35%;margin-bottom:1em">Order By Date  DESC</h2>
+   ';
 if($Games){
 while ($Result = $Games->fetch_assoc()) {
     if ($jogos_count == $max_jogos_por_pagina) {
