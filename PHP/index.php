@@ -17,13 +17,11 @@
       <!-- Bootstrap icons-->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  
       <!-- Core theme CSS (includes Bootstrap)-->
       <link href="/Css/index.css" rel="stylesheet" />
       <link rel="stylesheet" href="https://a.pub.network/core/pubfig/cls.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="Css/bootstrap.min.css">
-      
       <style>
          #h3 {
          animation: animate 1.5s linear infinite;
@@ -116,90 +114,75 @@
          </a>
       </h3>
       <!-- Section-->
-
-         
-<div class="container" style="margin-bottom:4em">
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner" style="margin-bottom: 2em;">
- <ol class="carousel-indicators" hidden>
-<?php
-$contador = 0;
-while ($contador!==count($ResultCount)){ if($contador==0){?>
-  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-  <?php }else{?> 
-  <li data-target="#myCarousel" data-slide-to="<?php echo $contador ?>"></li>
-  
-<?php }$contador=$contador+1;}?>
-</ol>
-
-<?php
-$contador = 0;
-$Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$UserID[ID]' ");
-           
-while ($Result = $Games->fetch_assoc()){ if($contador==0){?>
-  
-    <div class="item active card-body p-4" style="text-align:center" >
-    <img src="<?php echo $Result["Image"]; ?>" alt="GameImage"  style="width:18em;height:15em;margin-left:18.6em">
-    <h1 class="fw-bolder"><?php echo $Result["Titulo"]; ?></h1>
-<span class="fw-bolder"><i class="fa-brands fa-playstation fa-beat"></i>
-                                 <?php echo ($Result["Plataforma"]); ?>
-                                 <i class="fa-brands fa-playstation fa-beat"></i>
-                                 </span>
-                                 <div>
-                                    <div style=" display: inline;">
-<form action="remove.php" method="post" style="margin-right:10em">
-               <button class="botao" value="<?php echo $Result["ID"]?>" name="Delete" >Delete</button>
-               </form>
-            <form id ="buttons" method="post" action="update.php" style="margin-right:-10em;margin-top:-2.1em">
-               <input type = "hidden" id="inputHidden" name="UpdateHidden" value="<?php echo $Result["ID"]; ?>"> 
-               <button class="botaoUp">Update</button>
-            </form>
+      <div class="container" style="margin-bottom:4em">
+         <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" style="margin-bottom: 2em;">
+               <ol class="carousel-indicators" hidden>
+                  <?php
+                     $contador = 0;
+                     while ($contador!==count($ResultCount)){ if($contador==0){?>
+                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                  <?php }else{?> 
+                  <li data-target="#myCarousel" data-slide-to="<?php echo $contador ?>"></li>
+                  <?php }$contador=$contador+1;}?>
+               </ol>
+               <?php
+                  $contador = 0;
+                  $Games = $conexao->query("SELECT * FROM `registergame` WHERE UsuarioID='$UserID[ID]' ");
+                             
+                  while ($Result = $Games->fetch_assoc()){ if($contador==0){?>
+               <div class="item active card-body p-4" style="text-align:center" >
+                  <img src="<?php echo $Result["Image"]; ?>" alt="GameImage"  style="width:18em;height:15em;margin-left:18.6em">
+                  <h1 class="fw-bolder"><?php echo $Result["Titulo"]; ?></h1>
+                  <span class="fw-bolder"><i class="fa-brands fa-playstation fa-beat"></i>
+                  <?php echo ($Result["Plataforma"]); ?>
+                  <i class="fa-brands fa-playstation fa-beat"></i>
+                  </span>
+                  <div>
+                     <div style=" display: inline;">
+                        <form action="remove.php" method="post" style="margin-right:10em">
+                           <button class="botao" value="<?php echo $Result["ID"]?>" name="Delete" >Delete</button>
+                        </form>
+                        <form id ="buttons" method="post" action="update.php" style="margin-right:-10em;margin-top:-2.1em">
+                           <input type = "hidden" id="inputHidden" name="UpdateHidden" value="<?php echo $Result["ID"]; ?>"> 
+                           <button class="botaoUp">Update</button>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <?php $contador=$contador+1;}else{ ?>
+               <div class="item" style="text-align:center">
+                  <img src="<?php echo $Result["Image"]; ?>" alt="GameImage"  style="width:18em;height:15em;margin-left:18.6em">
+                  <h1 class="fw-bolder"><?php echo $Result["Titulo"]; ?></h1>
+                  <span class="fw-bolder"><i class="fa-brands fa-playstation fa-beat"></i>
+                  <?php echo ($Result["Plataforma"]); ?>
+                  <i class="fa-brands fa-playstation fa-beat"></i>
+                  </span>
+                  <div >
+                     <form action="remove.php" method="post" style="margin-right:10em">
+                        <button class="botao" value="<?php echo $Result["ID"]?>" name="Delete" >Delete</button>
+                     </form>
+                     <form id ="buttons" method="post" action="update.php" style="margin-right:-10em;margin-top:-2.1em">
+                        <input type = "hidden" id="inputHidden" name="UpdateHidden" value="<?php echo $Result["ID"]; ?>"> 
+                        <button class="botaoUp">Update</button>
+                     </form>
+                  </div>
+               </div>
+               <?php
+                  }}?>
+               <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+               <span class="glyphicon glyphicon-chevron-left"></span>
+               <span class="sr-only">Previous</span>
+               </a>
+               <a class="right carousel-control" href="#myCarousel" data-slide="next">
+               <span class="glyphicon glyphicon-chevron-right"></span>
+               <span class="sr-only">Next</span>
+               </a>
             </div>
-</div>
-                              </div>
-
-<?php $contador=$contador+1;}else{ ?>
-  
-   <div class="item" style="text-align:center">
-   <img src="<?php echo $Result["Image"]; ?>" alt="GameImage"  style="width:18em;height:15em;margin-left:18.6em">
-    <h1 class="fw-bolder"><?php echo $Result["Titulo"]; ?></h1>
-<span class="fw-bolder"><i class="fa-brands fa-playstation fa-beat"></i>
-                                 <?php echo ($Result["Plataforma"]); ?>
-                                 <i class="fa-brands fa-playstation fa-beat"></i>
-                                 </span>
-                                 <div >
-<form action="remove.php" method="post" style="margin-right:10em">
-               <button class="botao" value="<?php echo $Result["ID"]?>" name="Delete" >Delete</button>
-               </form>
-            <form id ="buttons" method="post" action="update.php" style="margin-right:-10em;margin-top:-2.1em">
-               <input type = "hidden" id="inputHidden" name="UpdateHidden" value="<?php echo $Result["ID"]; ?>"> 
-               <button class="botaoUp">Update</button>
-            </form>
-
-</div>
-                              </div>
-
-<?php
-}}?>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div> 
-</div>
-<!--colocar aqui o codigo excluido se nn der certo-->
-
-       
-
-
-
-         
-         <button class="glow-on-hover" id="add-btn" onclick="ShowForm()" style="position: relative;left: 50%;margin: -25px 0 0 -25px;background-color:rgba(0, 7, 19,0.0);text-align: center; z-index:10;border-radius:1em "><img src="/image/add.png" style="width: 50px; height: 50px;"></button>
          </div>
+         <!--colocar aqui o codigo excluido se nn der certo-->
+         <button class="glow-on-hover" id="add-btn" onclick="ShowForm()" style="position: relative;left: 50%;margin: -25px 0 0 -25px;background-color:rgba(0, 7, 19,0.0);text-align: center; z-index:10;border-radius:1em "><img src="/image/add.png" style="width: 50px; height: 50px;"></button>
+      </div>
       </section>
       <!-- Div Section -> Form Add Game-->
       <div id="ADD_CD" class="section" style="display: none">
@@ -218,18 +201,18 @@ while ($Result = $Games->fetch_assoc()){ if($contador==0){?>
                   <option>MegaDrive</option>
                   <option>Atari</option>
                   <?php
-                   $Plataforms = $conexao->query("SELECT `name` FROM `System`");
-                   $Plataforms=$Plataforms->fetch_all();
-                   $pos=0;
-                  while($Plataforms[$pos]!=null){
-                  ?>
-                   <option><?php echo implode($Plataforms[$pos]);
-                   ?>
+                     $Plataforms = $conexao->query("SELECT `name` FROM `System`");
+                     $Plataforms=$Plataforms->fetch_all();
+                     $pos=0;
+                     while($Plataforms[$pos]!=null){
+                     ?>
+                  <option><?php echo implode($Plataforms[$pos]);
+                     ?>
                   </option>
                   <?php
-               $pos=$pos+1;   
-               } var_dump($Plataforms);
-                  ?>
+                     $pos=$pos+1;   
+                     } var_dump($Plataforms);
+                        ?>
                </select>
                <span class="select-arrow"></span>
             </div>
@@ -278,10 +261,7 @@ while ($Result = $Games->fetch_assoc()){ if($contador==0){?>
             <p class="m-0 text-center text-white">Copyright &copy; JPW 2023</p>
          </div>
       </footer>
-   
-
    </body>
-   
    <!-- Bootstrap core JS-->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
    <!-- Core theme JS-->
@@ -336,6 +316,5 @@ while ($Result = $Games->fetch_assoc()){ if($contador==0){?>
       }
    </script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </html>
-
